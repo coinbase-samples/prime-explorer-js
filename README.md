@@ -2,11 +2,13 @@
 
 # Prime Explorer
 
-This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI that interacts with both the REST and WebSocket endpoints. The application was built using [Svelte](https://svelte.dev/), [Carbon Design System](https://carbondesignsystem.com/), and [TailWind CSS](https://tailwindcss.com/).
+This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI interacts with both the REST and WebSocket endpoints. 
+
+The application was built using [Svelte](https://svelte.dev/), [Carbon Design System](https://carbondesignsystem.com/), and [TailWind CSS](https://tailwindcss.com/).
 
 Requires [Node.js](https://nodejs.org) 16.x+
 
-# Clone the git repo
+## Clone the repo
 
 ```bash
 git clone git@github.com:coinbase-samples/prime-explorer-js.git
@@ -29,7 +31,7 @@ Navigate to your Prime Settings and pull your API credentials:
 https://prime.coinbase.com/portfolio/{your_portfolio_id}/settings/address-book
 ```
 
-Optionally, add Exchange API credentials (sandbox or prod):
+Optionally, add ExchAPI credentials (sandbox or prod):
 
 ```bash
 https://public.sandbox.exchange.coinbase.com/profile/api
@@ -37,7 +39,7 @@ https://public.sandbox.exchange.coinbase.com/profile/api
 
 ## Set environment variables
 
-Add the following environment variables to an .env file in base of the repository:
+Add the following environment variables to a .env file in base of the repository:
 
 ```bash
 PROD_SVC_ACCOUNTID=YOUR_SENDER_COMP_ID
@@ -60,7 +62,7 @@ Validate the values in the .env file:
 
 *Optional*
 
-To test some of the Coinbase Exchange endpoints, add the following to the .env file:
+To test some of the [Coinbase Exchange](https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts) endpoints, add the following to the .env file:
 
 ```bash
 EXCHANGE_PROD_ACCESS_KEY=YOUR_ACCESS_KEY
@@ -68,7 +70,7 @@ EXCHANGE_PROD_PASSPHRASE=YOUR_PASSPHRASE
 EXCHANGE_PROD_SIGNING_KEY=YOUR_SIGNING_KEY
 ```
 
-Run the application:
+## Run the application
 
 ```bash
 npm run dev
