@@ -23,15 +23,15 @@ cd /primer-explorer-js
 npm install
 ```
 
-## Set Prime credentials
+## Access credentials
 
-Navigate to your Prime Settings and pull your API credentials:
+Navigate to the Prime Settings page and pull the API credentials:
 
 ```bash
 https://prime.coinbase.com/portfolio/{your_portfolio_id}/settings/address-book
 ```
 
-Optionally, add ExchAPI credentials (sandbox or prod):
+Optionally, access Exchange credentials (sandbox or prod):
 
 ```bash
 https://public.sandbox.exchange.coinbase.com/profile/api
@@ -53,7 +53,7 @@ PORT=YOUR_PORT
 HTTP_HOST=http://localhost
 ENTITY_ID=YOUR_ENTITY_ID
 ```
-Validate the values in the .env file:
+Validate the values contained in the .env file:
 
 ```bash
  source .env
@@ -62,7 +62,7 @@ Validate the values in the .env file:
 
 *Optional*
 
-To test some of the [Coinbase Exchange](https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts) endpoints, add the following to the .env file:
+To test a partial list of the [Coinbase Exchange](https://docs.cloud.coinbase.com/exchange/reference/exchangerestapi_getaccounts) endpoints, add the following to the .env file:
 
 ```bash
 EXCHANGE_PROD_ACCESS_KEY=YOUR_ACCESS_KEY
