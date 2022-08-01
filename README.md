@@ -19,14 +19,13 @@ git clone git@github.com:coinbase-samples/prime-explorer-js.git
 Init via npm:
 
 ```bash
-cd /primer-explorer-js
+cd prime-explorer-js
 npm install
 ```
 
 ## Access credentials
 
 Navigate to the Prime Settings page and pull the API credentials:
-
 ```bash
 https://prime.coinbase.com/portfolio/{your_portfolio_id}/settings/address-book
 ```
@@ -87,6 +86,5 @@ Via CLI:
 npm run build
 ```
 
-Run the latest changes with `npm run start`.
-
+Run the latest changes with: `npm run start`
 
