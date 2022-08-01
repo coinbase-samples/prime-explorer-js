@@ -2,7 +2,7 @@
 
 # Prime Explorer
 
-This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI interacts with both the REST and WebSocket endpoints. 
+This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI interacts with both the REST and WebSocket endpoints.
 
 The application was built using [Svelte](https://svelte.dev/), [Carbon Design System](https://carbondesignsystem.com/), and [TailWind CSS](https://tailwindcss.com/).
 
@@ -85,6 +85,3 @@ Via CLI:
 ```bash
 npm run build
 ```
-
-Run the latest changes with: ```bashnpm run start```
-
