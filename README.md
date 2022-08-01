@@ -87,6 +87,6 @@ Via CLI:
 npm run build
 ```
 
-Run the latest changes with `npm run start`. This app uses [sirv](https://github.com/lukeed/sirv), which is included in the dependencies, so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Run the latest changes with `npm run start`.
 
 
