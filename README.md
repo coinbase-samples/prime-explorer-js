@@ -79,7 +79,6 @@ Navigate to [localhost:{{yourPort}}](http://localhost:{{yourPort}}). You should 
 
 ## Generate a build
 
-
 ```bash
 npm run build
 ```
