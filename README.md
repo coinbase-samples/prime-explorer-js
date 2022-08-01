@@ -77,10 +77,8 @@ npm run dev
 
 Navigate to [localhost:{{yourPort}}](http://localhost:{{yourPort}}). You should see the app running.
 
-
 ## Generate a build
 
-Via CLI:
 
 ```bash
 npm run build
