@@ -86,5 +86,5 @@ Via CLI:
 npm run build
 ```
 
-Run the latest changes with: `npm run start`
+Run the latest changes with: ```bashnpm run start```
 
