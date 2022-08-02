@@ -2,7 +2,7 @@
 
 # Prime Explorer
 
-This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI interacts with both the REST and WebSocket endpoints. 
+This application provides sample code that showcases the [Coinbase Prime APIs](https://docs.cloud.coinbase.com/prime/docs#introduction). The example UI interacts with both the REST and WebSocket endpoints.
 
 The application was built using [Svelte](https://svelte.dev/), [Carbon Design System](https://carbondesignsystem.com/), and [TailWind CSS](https://tailwindcss.com/).
 
@@ -19,14 +19,13 @@ git clone git@github.com:coinbase-samples/prime-explorer-js.git
 Init via npm:
 
 ```bash
-cd /primer-explorer-js
+cd prime-explorer-js
 npm install
 ```
 
 ## Access credentials
 
 Navigate to the Prime Settings page and pull the API credentials:
-
 ```bash
 https://prime.coinbase.com/portfolio/{your_portfolio_id}/settings/address-book
 ```
@@ -81,12 +80,6 @@ Navigate to [localhost:{{yourPort}}](http://localhost:{{yourPort}}). You should 
 
 ## Generate a build
 
-Via CLI:
-
 ```bash
 npm run build
 ```
-
-Run the latest changes with `npm run start`.
-
-
