@@ -67,6 +67,11 @@
         text="Place Order"
         on:click={(event) => routeTo(event, '/Orders/Create')}
       />
+      <SideNavMenuItem
+        href="/Orders/Allocations"
+        text="Orders Allocated"
+        on:click={(event) => routeTo(event, '/Orders/Allocations')}
+      />
     </SideNavMenu>
     <SideNavDivider />
     <SideNavMenu text="Transactions">
@@ -151,6 +156,11 @@
         text="Currencies"
         on:click={(event) => routeTo(event, '/Exchange/Currencies')}
       />
+      <SideNavMenuItem
+      href="/Exchange/Transfers"
+      text="Transfers"
+      on:click={(event) => routeTo(event, '/Exchange/Transfers')}
+    />
     </SideNavMenu>
     <SideNavDivider />
     <SideNavLink
