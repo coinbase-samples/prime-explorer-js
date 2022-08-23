@@ -17,18 +17,3 @@ export const getTransfers = async () => {
   }
 };
 
-export const getTransferId = async (transferId) => {
-  const { port, httpHost } = await fetchStore();
-
-  const url = `${httpHost}:${port}/api/exchange/transfers/${transferId}`;
-  const path = `/transfers/${transferId}`;
-  try {
-    const fetchTransferId = await makeCall('GET', url, path, '');
-
-    const transferDetails = await fetchTransferId.json();
-    console.log(transferDetails)
-    return transferDetails;
-  } catch (e) {
-    return e;
-  }
-};

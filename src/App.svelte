@@ -46,7 +46,6 @@
   import Addresses from './routes/Addresses.svelte';
   import CreateConversion from './routes/Transactions/CreateConversion.svelte';
   import Transfers from './routes/Exchange/Transfers.svelte';
-  import TransferId from './routes/Exchange/TransferId.svelte';
 
 
   const url = '';
@@ -86,7 +85,6 @@
   <Route path="/Exchange/ConvertCurrency" exact component={ConvertCurrency} />
   <Route path="/Exchange/Currencies" exact component={Currencies} />
   <Route path="/Exchange/Transfers" exact component={Transfers} />
-  <Route path="/Exchange/Transfer/:transferId" component={TransferId} />
   <Route path="/Exchange/Currencies/:currencyId" component={CurrencyId} />
 </Router>
 

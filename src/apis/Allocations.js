@@ -43,7 +43,6 @@ import _ from 'lodash-es';
         });
       });
 
-      console.log(result)
       return result
      
    } catch (e) {
