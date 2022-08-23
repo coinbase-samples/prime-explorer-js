@@ -48,13 +48,6 @@
         <span slot="description" style="font-size: 1rem">
           Retrieve Transfers
         </span>
-        <span slot="cell" let:row let:cell>
-          {#if cell.key === 'id' && cell.value}
-            <Link href="/Exchange/Transfers/{cell.value}">
-              {cell.value}
-            </Link>
-          {:else}{cell.value}{/if}
-        </span>
       </DataTable>
     {:else}
       <h3>Loading...</h3>
