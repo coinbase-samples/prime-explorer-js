@@ -74,13 +74,8 @@
         start_date: '2021-12-05T14:48:00Z',
       },
       onSubmit: (values) => {
-        const product_ids = values.product_ids;
-        const order_type = values.order_type;
-        const cursor = values.cursor;
-        const limit = values.limit;
-        const order_side = values.order_side;
-        const start_date = values.start_date;
-        const end_date = values.end_date;
+        const { product_ids, order_type, cursor, limit, order_side, start_date, end_date } = values;
+        
   
         submitForm(
           product_ids,
