@@ -26,19 +26,22 @@
     import queryString from 'querystring';
     import { createForm } from 'svelte-forms-lib';
     import _ from 'lodash-es';
-  
+    import { getDate } from '../../utils/constants'
+
     let allocations;
     let allocationsForm = false;
     let allocationsFilterView = false;
     let FilteredAllocations;
     let queryParams;
     let loaded;
+    const startDate= getDate(new Date(), -6);
+
   
     onMount(async () => {
       allocations = await getAllocations();
       loaded = true;
+
     });
-  
     const submitForm = async (
       product_ids,
       order_type,
@@ -71,7 +74,7 @@
     const { form, handleChange, handleSubmit } = createForm({
       initialValues: {
         product_ids: 'BTC-USD',
-        start_date: '2021-12-05T14:48:00Z',
+        start_date: startDate,
       },
       onSubmit: (values) => {
         const { product_ids, order_type, cursor, limit, order_side, start_date, end_date } = values;
