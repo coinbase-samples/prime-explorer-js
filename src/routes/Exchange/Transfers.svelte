@@ -25,7 +25,6 @@
   
     onMount(async () => {
       transfers = await getTransfers();
-      console.log(transfers)
       loaded = true;
     });
   </script>
