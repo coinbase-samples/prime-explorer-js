@@ -19,6 +19,7 @@
   import Orders from './routes/Orders/Orders.svelte';
   import OrderId from './routes/Orders/OrderId.svelte';
   import OrderFeed from './routes/Orders/OrderFeed.svelte';
+  import Allocations from './routes/Orders/Allocations.svelte';
   import Nav from './Nav.svelte';
   import { Router, Route } from 'svelte-routing';
   import AccountItem from './routes/AccountItem.svelte';
@@ -44,6 +45,9 @@
   import ActivityId from './routes/ActivityId.svelte';
   import Addresses from './routes/Addresses.svelte';
   import CreateConversion from './routes/Transactions/CreateConversion.svelte';
+  import Transfers from './routes/Exchange/Transfers.svelte';
+  import TransferId from './routes/Exchange/TransferId.svelte';
+
 
   const url = '';
 </script>
@@ -55,6 +59,7 @@
   <Route path="Orders" component={Orders} />
   <Route path="/Orders/:orderId" component={OrderId} />
   <Route path="/Orders/Feed" component={OrderFeed} />
+  <Route path="/Orders/Allocations" component={Allocations} />
   <Route path="/Orders/Create" component={PlaceOrder} orderForm="true" />
   <Route path="/Products" component={Products} />
   <Route path="/Users" component={Users} />
@@ -80,6 +85,8 @@
   />
   <Route path="/Exchange/ConvertCurrency" exact component={ConvertCurrency} />
   <Route path="/Exchange/Currencies" exact component={Currencies} />
+  <Route path="/Exchange/Transfers" exact component={Transfers} />
+  <Route path="/Exchange/Transfer/:transferId" component={TransferId} />
   <Route path="/Exchange/Currencies/:currencyId" component={CurrencyId} />
 </Router>
 
