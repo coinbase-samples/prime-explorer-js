@@ -19,6 +19,7 @@ export const makeCall = async (method, url, path, body) => {
         withCredentials: true,
         headers,
       });
+
       return callExchange;
     } else {
       const callExchange = await fetch(url, {

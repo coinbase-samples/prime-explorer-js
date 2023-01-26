@@ -23,7 +23,14 @@
     userList = await getPortfolioUsers();
   });
 </script>
-
+<div>
+  <a class="buy-with-crypto"
+    href="https://commerce.coinbase.com/checkout/a5b2403c-94e4-446a-9f1b-822e2b4a8e42">
+    Buy with Crypto
+  </a>
+  <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
+  </script>
+</div>
 <DataTable
   size="short"
   headers={[
@@ -45,7 +52,7 @@
           >https://docs.cloud.coinbase.com/prime/reference/primerestapi_getentityusers</OutboundLink
         >
       </li>
-      <li>Endpoint: /v1/entities/entity_id/users</li>
+      <li>Endpoint: /v2/entities/entity_id/users</li>
     </ul>
   </span>
 </DataTable>

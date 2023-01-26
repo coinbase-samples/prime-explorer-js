@@ -146,6 +146,12 @@
         on:click={(event) =>
           routeTo(event, '/Exchange/WithdrawToPaymentMethod')}
       />
+       <SideNavMenuItem
+        href="/Exchange/DepositToPaymentMethod"
+        text="DepositToPaymentMethod"
+        on:click={(event) =>
+          routeTo(event, '/Exchange/DepositToPaymentMethod')}
+      />
       <SideNavMenuItem
         href="/Exchange/ConvertCurrency"
         text="ConvertCurrency"
@@ -155,6 +161,11 @@
         href="/Exchange/Currencies"
         text="Currencies"
         on:click={(event) => routeTo(event, '/Exchange/Currencies')}
+      />
+      <SideNavMenuItem
+        href="/Exchange/Payments"
+        text="Payments"
+        on:click={(event) => routeTo(event, '/Exchange/Payments')}
       />
       <SideNavMenuItem
       href="/Exchange/Transfers"

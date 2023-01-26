@@ -8,7 +8,7 @@ export const WithdrawToCoinbaseAccount = async (
 ) => {
   const { PORT, httpHost } = await fetchStore();
 
-  const url = `${httpHost}:${PORT}/exchange/api/withdrawals/coinbase-account`;
+  const url = `${httpHost}:${PORT}/api/exchange/withdrawals/coinbase-account/`;
 
   const body = {
     amount,
@@ -17,7 +17,7 @@ export const WithdrawToCoinbaseAccount = async (
   };
 
   const payload = JSON.stringify(body);
-  const path = `/withdrawals/coinbase-account`;
+  const path = `/withdrawals/coinbase-account/`;
 
   try {
     const withDrawToCBAccount = await makeCall('POST', url, path, payload);
@@ -37,7 +37,7 @@ export const WithdrawToPaymentMethod = async (
 ) => {
   const { port, httpHost } = await fetchStore();
 
-  const url = `${httpHost}:${port}/exchange/api/withdrawals/payment-method`;
+  const url = `${httpHost}:${port}/api/exchange/withdrawals/payment-method`;
 
   const body = {
     amount,

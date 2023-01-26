@@ -23,5 +23,13 @@
 
 <Nav />
 <Content class="Layout">
+  <div>
+    <a class="buy-with-crypto"
+      href="https://commerce.coinbase.com/checkout/a5b2403c-94e4-446a-9f1b-822e2b4a8e42">
+      Buy with Crypto
+    </a>
+    <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
+    </script>
+  </div>
   <UsersList />
 </Content>

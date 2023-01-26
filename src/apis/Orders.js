@@ -79,7 +79,6 @@ export const createOrderPreview = async (
     display_base_size,
     portfolioId
   );
-  console.log(preview_body);
 
   const payload = JSON.stringify(preview_body);
 

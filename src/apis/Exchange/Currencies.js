@@ -6,6 +6,7 @@ export const getCurrencies = async () => {
 
   const url = `${httpHost}:${port}/api/exchange/currencies`;
   const path = '/currencies';
+
   try {
     const fetchCurrencies = await makeCall('GET', url, path, '');
 
