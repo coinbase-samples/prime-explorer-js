@@ -1,6 +1,5 @@
 import { fetchStore } from '../../stores/userSession-store';
 import { makeCall } from './ExchangeClient';
-//import { getAccounts } from '../../apis/Exchange/coinbase-accounts';
 
 export const DepositToExchangeAccount = async (
   amount,
