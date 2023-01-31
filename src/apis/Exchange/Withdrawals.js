@@ -17,7 +17,7 @@ export const WithdrawToCoinbaseAccount = async (
   };
 
   const payload = JSON.stringify(body);
-  const path = `/withdrawals/coinbase-account/`;
+  const path = '/withdrawals/coinbase-account/';
 
   try {
     const withDrawToCBAccount = await makeCall('POST', url, path, payload);
