@@ -24,7 +24,7 @@ export const getAllocations = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/allocations`;
   const allocationsUrl = `${httpHost}:${port}/api${path}?${
-    queryParams ? queryParams : 'start_date=2022-06-05T00:00:01Z'
+    queryParams ? queryParams : 'start_date=2023-01-05T00:00:01Z'
   }`;
 
   try {
