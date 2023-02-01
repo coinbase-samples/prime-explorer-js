@@ -34,7 +34,7 @@
     let FilteredAllocations;
     let queryParams;
     let loaded;
-    const startDate= getDate(new Date(), -6);
+    const startDate= getDate(new Date(), -3);
 
   
     onMount(async () => {
