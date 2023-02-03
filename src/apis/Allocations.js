@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 Coinbase Global, Inc.
+ * Copyright 2022-present Coinbase Global, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ export const getAllocations = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/allocations`;
   const allocationsUrl = `${httpHost}:${port}/api${path}?${
-    queryParams ? queryParams : 'start_date=2023-01-05T00:00:01Z'
+    queryParams ? queryParams : 'start_date=2022-present-01-05T00:00:01Z'
   }`;
 
   try {
