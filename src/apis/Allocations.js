@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Coinbase Global, Inc.
+ * Copyright 2022-present Coinbase Global, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,40 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- import { fetchStore } from '../stores/userSession-store';
- import { makeCall } from './PrimeClient';
+import { fetchStore } from '../stores/userSession-store';
+import { makeCall } from './PrimeClient';
 import _ from 'lodash-es';
 
- let allocations;
- let result;
- 
- export const getAllocations = async (queryParams) => {
-   const { port, portfolioId, httpHost } = await fetchStore();
-   const path = `/v1/portfolios/${portfolioId}/allocations`;
-   const allocationsUrl = `${httpHost}:${port}/api${path}?${
-    queryParams ? queryParams : 'start_date=2022-06-05T00:00:01Z'
+let allocations;
+let result;
+
+export const getAllocations = async (queryParams) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+  const path = `/v1/portfolios/${portfolioId}/allocations`;
+  const allocationsUrl = `${httpHost}:${port}/api${path}?${
+    queryParams ? queryParams : 'start_date=2022-present-01-05T00:00:01Z'
   }`;
 
-   try {
-     const fetchAllocations = await makeCall('GET', allocationsUrl, path, '');
- 
-     const allocationsResponse = await fetchAllocations.json();
+  try {
+    const fetchAllocations = await makeCall('GET', allocationsUrl, path, '');
 
-     allocations = allocationsResponse.allocations
+    const allocationsResponse = await fetchAllocations.json();
+
+    allocations = allocationsResponse.allocations;
     const keys = {
-        root_id: 'id'
-    }
+      root_id: 'id',
+    };
 
-     result = await allocations.map(function (o) {
-        return _.mapKeys(o, function (v, k) {
-            return k in keys ? keys[k] : k;
-        });
+    result = await allocations.map(function (o) {
+      return _.mapKeys(o, function (v, k) {
+        return k in keys ? keys[k] : k;
       });
+    });
 
-      return result
-     
-   } catch (e) {
-     return e;
-   }
- };
- 
+    return result;
+  } catch (e) {
+    return e;
+  }
+};

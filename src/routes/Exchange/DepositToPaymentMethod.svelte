@@ -15,39 +15,48 @@
    * limitations under the License.
    */
 
+  import { getProfiles } from '../../apis/Exchange/Profiles';
   import { onMount } from 'svelte';
   import 'carbon-components-svelte/css/white.css';
   import Nav from '../../Nav.svelte';
   import { createForm } from 'svelte-forms-lib';
   import { Content, CodeSnippet } from 'carbon-components-svelte';
-  import { ConvertCurrency } from '../../apis/Exchange/ConvertCurrency';
-  let convertCurrencyPost;
-  let conversionBlock;
+  import { DepositToExchangeAccount } from '../../apis/Exchange/Deposits';
+
+  let depositPost;
+  let depositBlock;
   let id;
-  let conversionResponse;
+  let depositResponse;
 
-  onMount(async () => {});
+  onMount(async () => {
+    const profile = await getProfiles();
 
-  const submitForm = async (profile_id, from, to, amount) => {
-    convertCurrencyPost = await ConvertCurrency(profile_id, from, to, amount);
+    id = profile[0].id;
+    depositBlock = false;
+  });
 
-    conversionResponse = JSON.stringify(convertCurrencyPost);
-    conversionBlock = true;
+  const submitForm = async (amount, profile_id, currency, coinbase_account_id) => {
+    depositPost = await DepositToExchangeAccount(
+      amount,
+      profile_id,
+      currency,
+      coinbase_account_id
+    );
+    depositResponse = JSON.stringify(depositPost);
+    depositBlock = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
-      profile_id: '1111',
-      from: 'USD',
-      to: 'USDC',
       amount: '1',
+      currency: 'USDC',
     },
     onSubmit: (values) => {
-      const profile_id = id;
-      const from = values.from;
-      const to = values.to;
       const amount = values.amount;
-      submitForm(profile_id, from, to, amount);
+      const profile_id = values.profile_id; 
+      const currency = values.currency;
+      const coinbase_account_id = values.coinbase_account_id;
+      submitForm(amount, profile_id,currency, coinbase_account_id);
     },
   });
 </script>
@@ -60,8 +69,16 @@
     class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
   >
     <label htmlFor="type" class="mb-2 block text-sm font-bold text-gray-700"
-      ><b>Convert a Currency:</b></label
+      ><b>Deposit from Retail to Exchange:</b></label
     ><br />
+    <label for="amount">Amount</label><br />
+    <input
+      id="amount"
+      name="amount"
+      class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+      on:change={handleChange}
+      bind:value={$form.amount}
+    />
     <label for="profile_id">Profile Id</label><br />
     <input
       id="profile_id"
@@ -70,38 +87,30 @@
       on:change={handleChange}
       bind:value={$form.profile_id}
     />
-    <label for="from">From (token)</label><br />
+    <label for="currency">Currency</label><br />
     <input
-      id="from"
-      name="from"
+      id="currency"
+      name="currency"
       class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
       on:change={handleChange}
-      bind:value={$form.from}
+      bind:value={$form.currency}
     />
-    <label for="to">To: </label><br />
+    
     <input
-      id="to"
-      name="to"
+      id="coinbase_account_id"
+      name="coinbase_account_id"
       class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
       on:change={handleChange}
-      bind:value={$form.to}
-    />
-    <label for="amount">Amount: </label><br />
-    <input
-      id="amount"
-      name="amount"
-      class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
-      on:change={handleChange}
-      bind:value={$form.amount}
+      bind:value={$form.coinbase_account_id}
     />
 
     <button
       class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
       type="submit">Submit</button
     ><br /><br />
-    {#if conversionBlock}
+    {#if depositBlock}
       <CodeSnippet type="multi" wrapText="true" expanded="true"
-        >{conversionResponse}</CodeSnippet
+        >{depositResponse}</CodeSnippet
       >
     {/if}
   </form>

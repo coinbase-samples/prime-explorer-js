@@ -17,14 +17,14 @@
 
   import { onMount } from 'svelte';
   import { Content, DataTable, Link } from 'carbon-components-svelte';
-  import { getCurrencies } from '../../apis/Exchange/Currencies';
+  import { getPaymentMethods } from '../../apis/Exchange/PaymentMethods';
   import Nav from '../../Nav.svelte';
 
-  let currencies;
+  let payments;
   let loaded;
 
   onMount(async () => {
-    currencies = await getCurrencies();
+    payments = await getPaymentMethods();
     loaded = true;
   });
 </script>
@@ -41,15 +41,15 @@
         { key: 'convertible_to', value: 'Convertible to' },
         { key: 'details.crypto_address_link', value: 'Details' },
       ]}
-      rows={currencies}
+      rows={payments}
     >
-      <strong slot="title">Currencies List</strong>
+      <strong slot="title">getPaymentMethods List</strong>
       <span slot="description" style="font-size: 1rem">
-        Retrieve Currencies
+        Retrieve getPaymentMethods
       </span>
       <span slot="cell" let:row let:cell>
         {#if cell.key === 'id' && cell.value}
-          <Link href="/Exchange/Currencies/{cell.value}">
+          <Link href="/Exchange/payments/{cell.value}">
             {cell.value}
           </Link>
         {:else}{cell.value}{/if}

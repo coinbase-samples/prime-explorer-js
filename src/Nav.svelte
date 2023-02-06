@@ -1,6 +1,6 @@
 <script>
   /**
-   * Copyright 2022 Coinbase Global, Inc.
+   * Copyright 2022-present Coinbase Global, Inc.
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -146,6 +146,12 @@
         on:click={(event) =>
           routeTo(event, '/Exchange/WithdrawToPaymentMethod')}
       />
+       <SideNavMenuItem
+        href="/Exchange/DepositToPaymentMethod"
+        text="DepositToPaymentMethod"
+        on:click={(event) =>
+          routeTo(event, '/Exchange/DepositToPaymentMethod')}
+      />
       <SideNavMenuItem
         href="/Exchange/ConvertCurrency"
         text="ConvertCurrency"
@@ -155,6 +161,11 @@
         href="/Exchange/Currencies"
         text="Currencies"
         on:click={(event) => routeTo(event, '/Exchange/Currencies')}
+      />
+      <SideNavMenuItem
+        href="/Exchange/Payments"
+        text="Payments"
+        on:click={(event) => routeTo(event, '/Exchange/Payments')}
       />
       <SideNavMenuItem
       href="/Exchange/Transfers"

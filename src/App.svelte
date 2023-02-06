@@ -1,6 +1,6 @@
 <script>
   /**
-   * Copyright 2022 Coinbase Global, Inc.
+   * Copyright 2022-present Coinbase Global, Inc.
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@
   import Exchange from './routes/Exchange/Exchange.svelte';
   import Withdrawals from './routes/Exchange/Withdrawals.svelte';
   import WithdrawToPaymentMethod from './routes/Exchange/WithdrawToPaymentMethod.svelte';
+  import DepositToPaymentMethod from './routes/Exchange/DepositToPaymentMethod.svelte';
   import CreateWallet from './routes/Wallets/CreateWallet.svelte';
   import ConvertCurrency from './routes/Exchange/ConvertCurrency.svelte';
   import Currencies from './routes/Exchange/Currencies.svelte';
@@ -46,6 +47,7 @@
   import Addresses from './routes/Addresses.svelte';
   import CreateConversion from './routes/Transactions/CreateConversion.svelte';
   import Transfers from './routes/Exchange/Transfers.svelte';
+  import PaymentMethods from './routes/Exchange/PaymentMethods.svelte';
 
 
   const url = '';
@@ -82,8 +84,15 @@
     exact
     component={WithdrawToPaymentMethod}
   />
+  <Route
+    path="/Exchange/DepositToPaymentMethod"
+    exact
+    component={DepositToPaymentMethod}
+  />
   <Route path="/Exchange/ConvertCurrency" exact component={ConvertCurrency} />
   <Route path="/Exchange/Currencies" exact component={Currencies} />
+    <Route path="/Exchange/Payments" exact component={PaymentMethods} />
+
   <Route path="/Exchange/Transfers" exact component={Transfers} />
   <Route path="/Exchange/Currencies/:currencyId" component={CurrencyId} />
 </Router>

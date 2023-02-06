@@ -1,6 +1,6 @@
 <script>
   /**
-   * Copyright 2022 Coinbase Global, Inc.
+   * Copyright 2022-present Coinbase Global, Inc.
    *
    * Licensed under the Apache License, Version 2.0 (the "License");
    * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@
     userList = await getPortfolioUsers();
   });
 </script>
-
 <DataTable
   size="short"
   headers={[
@@ -45,7 +44,7 @@
           >https://docs.cloud.coinbase.com/prime/reference/primerestapi_getentityusers</OutboundLink
         >
       </li>
-      <li>Endpoint: /v1/entities/entity_id/users</li>
+      <li>Endpoint: /v2/entities/entity_id/users</li>
     </ul>
   </span>
 </DataTable>

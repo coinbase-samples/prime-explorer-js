@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Coinbase Global, Inc.
+ * Copyright 2022-present Coinbase Global, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,57 +14,51 @@
  * limitations under the License.
  */
 
-require("dotenv").config();
+require('dotenv').config();
 
-
-const express = require("express");
-const proxy = require("express-http-proxy");
+const express = require('express');
+const proxy = require('express-http-proxy');
 const PORT = process.env.PORT;
 
-const myPrimeProxy = proxy("https://api.prime.coinbase.com", {
-  proxyReqPathResolver: (req) => req.originalUrl.replace("/api", ""),
+const myPrimeProxy = proxy('https://api.prime.coinbase.com', {
+  proxyReqPathResolver: (req) => req.originalUrl.replace('/api', ''),
 });
 
-const myOauthProxy = proxy("https://api.coinbase.com", {
-  proxyReqPathResolver: (req) => req.originalUrl.replace("/oauthAPI", "/oauth"),
+const myOauthProxy = proxy('https://api.coinbase.com', {
+  proxyReqPathResolver: (req) => req.originalUrl.replace('/oauthAPI', '/oauth'),
 });
 
-const myUserProxy = proxy("https://api.coinbase.com", {
-  proxyReqPathResolver: (req) => req.originalUrl.replace("/user", ""),
+const myUserProxy = proxy('https://api.coinbase.com', {
+  proxyReqPathResolver: (req) => req.originalUrl.replace('/user', ''),
 });
 
-const myAnalyticsProxy = proxy("https://app.analytics.coinbase.com", {
-  proxyReqPathResolver: (req) => req.originalUrl.replace("/analytics", "/api"),
+const myAnalyticsProxy = proxy('https://app.analytics.coinbase.com', {
+  proxyReqPathResolver: (req) => req.originalUrl.replace('/analytics', '/api'),
 });
 
 //https://api-public.sandbox.exchange.coinbase.com
-const myExchangeProxy = proxy(
-  "https://api-public.sandbox.exchange.coinbase.com",
-  {
-    proxyReqPathResolver: (req) => req.originalUrl.replace("/api/exchange", ""),
-  }
-);
+const myExchangeProxy = proxy('https://api.exchange.coinbase.com', {
+  proxyReqPathResolver: (req) => req.originalUrl.replace('/api/exchange', ''),
+});
 
 const app = express();
 const port = process.env.PORT || PORT;
-const cors = require("cors");
-const path = require("path");
+const cors = require('cors');
+const path = require('path');
 
 app.use(cors());
-app.use("/api/exchange", myExchangeProxy);
-app.use("/api", myPrimeProxy);
-app.use("/oauthAPI", myOauthProxy);
-app.use("/user", myUserProxy);
-app.use("/analytics", myAnalyticsProxy);
+app.use('/api/exchange', myExchangeProxy);
+app.use('/api', myPrimeProxy);
+app.use('/oauthAPI', myOauthProxy);
+app.use('/user', myUserProxy);
+app.use('/analytics', myAnalyticsProxy);
 
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "./public", "index.html"));
+  res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
 //use /api pattern for each api request.
 
-app.listen(port, () => {
-
-});
+app.listen(port, () => {});

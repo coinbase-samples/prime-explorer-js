@@ -1,6 +1,6 @@
 <script>
     /**
-     * Copyright 2022 Coinbase Global, Inc.
+     * Copyright 2022-present Coinbase Global, Inc.
      *
      * Licensed under the Apache License, Version 2.0 (the "License");
      * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@
     let FilteredAllocations;
     let queryParams;
     let loaded;
-    const startDate= getDate(new Date(), -6);
+    const startDate= getDate(new Date(), -3);
 
   
     onMount(async () => {
