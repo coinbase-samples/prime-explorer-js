@@ -23,7 +23,6 @@ export const WithdrawToCoinbaseAccount = async (
     const withDrawToCBAccount = await makeCall('POST', url, path, payload);
 
     const response = await withDrawToCBAccount.json();
-    console.log(response);
 
     return response;
   } catch (e) {
