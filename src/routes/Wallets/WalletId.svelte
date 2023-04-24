@@ -39,6 +39,8 @@
   onMount(async () => {
     walletIdDetails = await getWalletId(walletId);
     result = walletIdDetails;
+    console.log(result);
+    name = walletIdDetails.name;
     details = false;
   });
 
@@ -73,7 +75,7 @@
               </div>
               <div class="mt-3 flex flex-row justify-between">
                 <div>
-                  <h4>Name: {name} :</h4>
+                  <h4>Name: {name}</h4>
                   <WalletBalance {walletId} />
 
                   <CodeSnippet
