@@ -19,9 +19,7 @@
   import { onMount } from 'svelte';
 
   export let walletId;
-  let result;
   let walletBalanceDetails;
-  let balance;
   onMount(async () => {
     walletBalanceDetails = await getWalletBalance(walletId);
   });
