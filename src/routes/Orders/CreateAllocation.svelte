@@ -1,9 +1,8 @@
 <script>
   import { navigate } from 'svelte-routing';
   import Nav from '../../Nav.svelte';
-  import { onMount } from 'svelte';
   import { getOrders } from '../../apis/Orders';
-  import { createAllocation } from '../../apis/CreateAllocation'
+  import { createAllocation } from '../../apis/Allocations';
   import { generateQueryparams } from '../../utils/queryParams';
   import {
     Content,
@@ -12,6 +11,7 @@
     MultiSelect, 
     TextArea,
   } from 'carbon-components-svelte';
+  import { getAvaialableAllocationsDate } from '../../utils/constants';
 
   
   let orders = [];
@@ -19,12 +19,16 @@
   let payload = [];
   let selectedIds = [];
   let showOrdersSelect = false;
+  let showOrdersSideSelect = false;
+
   let selectedAsset;
+  let selectedSide;
 
 
   // onMount(async () => {
 
  const generateOrdersList = async (queryParams) => {
+  //72 hours time cap
    const params = generateQueryparams(queryParams);
     orders = await getOrders(params);
     orderList = orders.orders.slice(0, 10);
@@ -37,32 +41,35 @@
     });
   };
   
-  //});
-
+ const startDate = getAvaialableAllocationsDate(3);
+ console.log(startDate);
   
   const alertPrompt = (result) => {
     alert('Allocation initiated', result);
      navigate('/Orders/Allocations');
   }
 
-   const handleAssetSelect = async (event) => {
-    selectedAsset = event.target.value;
-   const payload=  {
-  start_date: '2023-03-05T00:00:01Z',
+   const handleAssetSelect = async () => {
+    // selectedAsset = event.target.value;
+   const queryParams=  {
+  start_date: startDate,
   product_ids: selectedAsset,
+  order_side: selectedSide,
+
 };
-    await generateOrdersList(payload);
+    await generateOrdersList(queryParams);
     showOrdersSelect = true;
+    showOrdersSideSelect = true;
   };
 
   const executeAllocation = async () => {
     // Loop through selectedIds array and retrieve text value for each selected item
-    const selectedItems = await selectedIds.map(id => {
+    const selectedItems = selectedIds.map(id => {
       return payload.find(item => item.id === id).text;
     });
 
     console.log(selectedItems);
-    const result = await createAllocation(selectedItems, "BASE");
+    const result = await createAllocation(selectedAsset, selectedItems, "PERCENT");
     alertPrompt(result)
 
   };
@@ -70,10 +77,25 @@
 
 <Nav />
 <Content class="Layout">
-
   <label 
     class="mb-2 block text-sm font-bold text-gray-700"
-    for="choose-asset"><b>Choose Asset:</b></label>
+    for="choose-asset"><b>Side:</b></label>
+    <br />
+  <select
+  id="choose-side" 
+  name="choose-side"
+  class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+  bind:value={selectedSide}
+>
+  <option value="ss">Choose Order Side</option>
+  <option value="BUY">BUY</option>
+  <option value="SELL">SELL</option>
+</select>
+
+<br />
+  <label 
+    class="mb-2 block text-sm font-bold text-gray-700"
+    for="choose-asset"><b>Asset:</b></label>
     <br />
   <select
      id="choose-asset" 
@@ -81,11 +103,14 @@
      class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
      bind:value={selectedAsset} 
      on:change={handleAssetSelect}>
-  <option value="">-- Please Choose --</option>
+  <option value="">Choose Asset</option>
   <option value="BTC-USD">BTC-USD</option>
   <option value="ETH-USD">ETH-USD</option>
+  <option value="SOL-USD">SOL-USD</option>
+  <option value="MATIC-USD">MATIC-USD</option>
+
 </select>
-  {#if showOrdersSelect}
+  {#if showOrdersSelect && showOrdersSideSelect}
   <MultiSelect
     size="xl"
     label="Select Orders to Allocate"

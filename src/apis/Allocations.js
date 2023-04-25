@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { fetchStore } from '../stores/userSession-store';
+import { v4 as uuidv4 } from 'uuid';
 import { makeCall } from './PrimeClient';
 import _ from 'lodash-es';
 
@@ -21,6 +22,7 @@ let allocations;
 let result;
 
 export const getAllocationId = async (allocationId) => {
+  
   const { port, portfolioId, httpHost } = await fetchStore();
   const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
   const path = `/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
@@ -35,6 +37,7 @@ export const getAllocationId = async (allocationId) => {
 };
 
 export const getAllocations = async (queryParams) => {
+  
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/allocations`;
   const allocationsUrl = `${httpHost}:${port}/api${path}?${
@@ -58,6 +61,47 @@ export const getAllocations = async (queryParams) => {
     });
 
     return result;
+  } catch (e) {
+    return e;
+  }
+};
+
+
+export const createAllocation = async (product_ids, order_ids, size_type) => {
+  const allocation_id = uuidv4();
+  const allocation_leg_id = uuidv4();
+  
+  const { portfolioId, destinationPortfolio, httpHost, port } =
+    await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/allocations`;
+  const path = `/v1/allocations`;
+  const product_id = product_ids;
+
+  const allocation_legs = [
+    {
+      allocation_leg_id,
+      destination_portfolio_id: destinationPortfolio,
+      amount: '100',
+    },
+  ];
+  const body = {
+    allocation_id,
+    source_portfolio_id: portfolioId,
+    product_id,
+    order_ids,
+    allocation_legs,
+    size_type,
+  };
+
+  const payload = JSON.stringify(body);
+
+  try {
+    const initiateAllocation = await makeCall('POST', url, path, payload);
+
+    const response = await initiateAllocation.json();
+
+    return response;
   } catch (e) {
     return e;
   }
