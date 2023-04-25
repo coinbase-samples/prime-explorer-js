@@ -95,7 +95,6 @@
      const stringifiedQueryParams = generateQueryparams(queryParams);
     
      ordersFilter = await getOrders(stringifiedQueryParams);
-     console.log(ordersFilter)
      ordersFilterView = true;
   };
 
