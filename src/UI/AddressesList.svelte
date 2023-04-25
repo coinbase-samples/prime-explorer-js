@@ -17,12 +17,11 @@
 
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getAddressBook } from '../apis/AddressBook';
   import { Content, Button, OutboundLink } from 'carbon-components-svelte';
   import { DataTable, Link } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
   import CreateAddressForm from './CreateAddressForm.svelte';
+  import { generateQueryparams } from '../utils/queryParams';
 
   let addresses;
   let addressesFilter;
@@ -53,12 +52,9 @@
       limit,
       sort_direction,
     };
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
+    
 
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
 
     addressesFilter = await getAddressBook(stringifiedQueryParams);
     addressesFilterView = true;

@@ -16,12 +16,11 @@
    */
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getTransactions } from '../../apis/Transactions';
   import { Content, Button, OutboundLink } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
   import { DataTable, Link } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
+  import { generateQueryparams } from '../../utils/queryParams';
 
   let transactions;
   let TransactionsFilter;
@@ -44,11 +43,8 @@
       end_time: endTime,
       limit,
     };
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
+
     TransactionsFilter = await getTransactions(stringifiedQueryParams);
     transactionsFilterView = true;
   };

@@ -26,9 +26,8 @@
     OutboundLink,
     Pagination,
   } from 'carbon-components-svelte';
-  import queryString from 'querystring';
   import { createForm } from 'svelte-forms-lib';
-  import _ from 'lodash-es';
+    import { generateQueryparams } from '../../utils/queryParams';
 
   let orders;
   let ordersFilter;
@@ -47,8 +46,9 @@
     next_cursor = orders.pagination.next_cursor;
     has_next = orders.pagination.has_next;
     orders = orders.orders;
-    totalOrderItems = _.size(orders);
-    const pluckedItems = _.take(orders, 10);
+    totalOrderItems = Object.keys(orders).length;
+    const pluckedItems = orders.slice(0, 10);
+
     orders = pluckedItems;
   });
 
@@ -61,15 +61,15 @@
     ordersFilterView = true;
   };
 
-  const updateOrders = async () => {
-    try {
-      const filteredOrders = await getOrders(stringifiedQueryParams);
-      ordersFilter = filteredOrders.orders;
-      ordersFilterView = true;
-    } catch (e) {
-      alert(e);
-    }
-  };
+  // const updateOrders = async () => {
+  //   try {
+  //     const filteredOrders = await getOrders(stringifiedQueryParams);
+  //     ordersFilter = filteredOrders.orders;
+  //     ordersFilterView = true;
+  //   } catch (e) {
+  //     alert(e);
+  //   }
+  // };
 
   const submitForm = async (
     product_ids,
@@ -92,20 +92,18 @@
       end_date,
     };
 
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-
-    stringifiedQueryParams = queryString.stringify(filteredQueryParams);
-    closeForm();
-    await updateOrders();
+     const stringifiedQueryParams = generateQueryparams(queryParams);
+    
+     ordersFilter = await getOrders(stringifiedQueryParams);
+     console.log(ordersFilter)
+     ordersFilterView = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
       product_ids: 'BTC-USD',
       start_date: '2021-12-05T14:48:00Z',
+      order_side: 'BUY'
     },
     onSubmit: (values) => {
       const order_statuses = values.order_statuses;
@@ -290,7 +288,7 @@
         { key: 'created_at', value: 'Created At' },
         { key: 'base_quantity', value: 'Base Quantity' },
       ]}
-      rows={ordersFilter}
+      rows={ordersFilter.orders}
     >
       <strong slot="title">Filtered Orders List</strong>
       <span slot="description" style="font-size: 1rem">

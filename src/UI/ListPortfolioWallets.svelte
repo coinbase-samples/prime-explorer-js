@@ -24,10 +24,9 @@
     Link,
     OutboundLink,
   } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getPortfolioWallets } from '../apis/Wallets';
+  import { generateQueryparams } from '../utils/queryParams';
 
   let portfolioWallets;
   let loaded;
@@ -36,22 +35,13 @@
   let WalletsFilter;
   let queryParams;
   let stringifiedQueryParams;
-  let filteredQueryParams;
 
   onMount(async () => {
     portfolioWallets = await getPortfolioWallets();
     loaded = true;
   });
 
-  const updateWallets = async () => {
-    try {
-      const filteredWallets = await getPortfolioWallets(stringifiedQueryParams);
-      WalletsFilter = await filteredWallets;
-      WalletsFilterView = true;
-    } catch (e) {
-      alert(e);
-    }
-  };
+ 
 
   const submitForm = async (type, cursor, limit, sort_direction, symbols) => {
     queryParams = {
@@ -61,14 +51,11 @@
       sort_direction,
       symbols,
     };
-    filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-    stringifiedQueryParams = queryString.stringify(filteredQueryParams);
 
-    closeForm();
-    await updateWallets(stringifiedQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
+
+      WalletsFilter = await getPortfolioWallets(stringifiedQueryParams);
+      WalletsFilterView = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({

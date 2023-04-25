@@ -16,8 +16,8 @@
    */
 
   import { onMount } from 'svelte';
-  import queryString from 'querystring';
-  import _ from 'lodash-es';
+  import { generateQueryparams } from '../utils/queryParams';
+
   import {
     Content,
     Button,
@@ -60,17 +60,11 @@
       limit,
     };
 
-    console.log(queryParams);
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
 
     activitiesFilter = await getActivities(stringifiedQueryParams);
+    console.log(activitiesFilter)
     activitiesFilterView = true;
-    closeForm();
   };
 
   const { form, handleChange, handleSubmit } = createForm({
