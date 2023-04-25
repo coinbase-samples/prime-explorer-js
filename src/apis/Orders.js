@@ -137,7 +137,7 @@ export const getOrders = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/orders`;
   const ordersUrl = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/orders?${
-    queryParams ? queryParams : 'start_date=2022-06-05T00:00:01Z'
+    queryParams ? queryParams : 'start_date=2023-03-05T00:00:01Z'
   }`;
 
   try {

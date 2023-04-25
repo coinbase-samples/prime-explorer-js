@@ -238,7 +238,7 @@
         </span>
         <span slot="cell" let:row let:cell>
             {#if cell.key === 'id' && cell.value}
-              <Link href="/Orders/Allocations/{cell.value}}">
+              <Link href="/Orders/Allocations/{cell.value}">
                {cell.value}
               </Link>
             {:else}{cell.value}{/if}
@@ -248,14 +248,13 @@
       <DataTable
         size="short"
         headers={[
-         { key: 'id', value: 'Root Id' },
+          { key: 'id', value: 'Root Id' },
           { key: 'product_id', value: 'Product Id' },
-          {key: 'status', value: 'Status'},
+          { key: 'status', value: 'Status'},
           { key: 'side', value: 'Side' },
           { key: 'quote_value', value: 'Quote Value' },
           { key: 'base_quantity', value: 'Base Quantity' },
           {key: 'destinations[0].leg_id', value: 'Destination Portfolio'}
-
         ]}
         rows={allocations}
       >
@@ -272,6 +271,14 @@
             <li>Endpoint: /v1/portfolios/portfolio_id/allocations</li>
           </ul>
         </span>
+         <span slot="cell" let:row let:cell>
+            {#if cell.key === 'id' && cell.value}
+              <Link href="/Orders/Allocations/{cell.value}">
+               {cell.value}
+              </Link>
+            {:else}{cell.value}{/if}
+          </span>
+        
       </DataTable>
     {/if}
   {:else}

@@ -20,11 +20,25 @@ import _ from 'lodash-es';
 let allocations;
 let result;
 
+export const getAllocationId = async (allocationId) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
+  const path = `/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
+
+  try {
+    const fetchAllocationId = await makeCall('GET', url, path, '');
+    const allocationResponse = await fetchAllocationId.json();
+    return allocationResponse.allocation;
+  } catch (e) {
+    return e;
+  }
+};
+
 export const getAllocations = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/allocations`;
   const allocationsUrl = `${httpHost}:${port}/api${path}?${
-    queryParams ? queryParams : 'start_date=2023-01-05T00:00:01Z'
+    queryParams ? queryParams : 'start_date=2023-04-05T00:00:01Z'
   }`;
 
   try {

@@ -48,6 +48,8 @@
   import CreateConversion from './routes/Transactions/CreateConversion.svelte';
   import Transfers from './routes/Exchange/Transfers.svelte';
   import PaymentMethods from './routes/Exchange/PaymentMethods.svelte';
+  import CreateAllocation from './routes/Orders/CreateAllocation.svelte';
+  import AllocationId from './routes/Orders/AllocationId.svelte';
 
 
   const url = '';
@@ -61,7 +63,9 @@
   <Route path="/Orders/:orderId" component={OrderId} />
   <Route path="/Orders/Feed" component={OrderFeed} />
   <Route path="/Orders/Allocations" component={Allocations} />
+  <Route path="/Orders/Allocations/:allocationId" component={AllocationId} />
   <Route path="/Orders/Create" component={PlaceOrder} orderForm="true" />
+  <Route path="/Orders/Allocate" component={CreateAllocation} />
   <Route path="/Products" component={Products} />
   <Route path="/Users" component={Users} />
   <Route path="/Transactions" component={Transactions} />

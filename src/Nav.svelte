@@ -72,6 +72,11 @@
         text="Orders Allocated"
         on:click={(event) => routeTo(event, '/Orders/Allocations')}
       />
+        <SideNavMenuItem
+        href="/Orders/CreateAllocation"
+        text="Create Allocation"
+        on:click={(event) => routeTo(event, '/Orders/Allocate')}
+      />
     </SideNavMenu>
     <SideNavDivider />
     <SideNavMenu text="Transactions">
