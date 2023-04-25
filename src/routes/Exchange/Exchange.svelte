@@ -31,9 +31,7 @@
 
   onMount(async () => {
     const profile = await getProfiles();
-    //const exchangeResult = await createExchangeOrder();
-    const exchangeResult = await getOrderById();
-    console.log(exchangeResult)
+   
     id = profile[0].id;
     addressBlock = false;
   });
