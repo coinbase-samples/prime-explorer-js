@@ -6,6 +6,5 @@ export const generateQueryparams = (queryParams) => {
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
     .join('&');
-  console.log(params);
   return params;
 };

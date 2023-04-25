@@ -28,7 +28,6 @@
    const params = generateQueryparams(queryParams);
     orders = await getOrders(params);
     orderList = orders.orders.slice(0, 10);
-    console.log(orderList);
     // Modify payload to include both id and text properties
     payload = orderList.map((item, index) => {
       return {

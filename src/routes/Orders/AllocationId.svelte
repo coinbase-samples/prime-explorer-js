@@ -33,7 +33,6 @@
 
   onMount(async () => {
     allocationIdDetails = await getAllocationId(allocationId);
-    console.log('hit allocationIdDetails', allocationId)
     result = allocationIdDetails;
 
     amount = result.amount;

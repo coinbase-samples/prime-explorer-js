@@ -63,7 +63,6 @@
     const stringifiedQueryParams = generateQueryparams(queryParams);
 
     activitiesFilter = await getActivities(stringifiedQueryParams);
-    console.log(activitiesFilter)
     activitiesFilterView = true;
   };
 

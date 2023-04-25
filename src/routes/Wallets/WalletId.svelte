@@ -39,7 +39,6 @@
   onMount(async () => {
     walletIdDetails = await getWalletId(walletId);
     result = walletIdDetails;
-    console.log(result);
     name = walletIdDetails.name;
     details = false;
   });
