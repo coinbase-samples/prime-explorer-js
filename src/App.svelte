@@ -22,7 +22,6 @@
   import Allocations from './routes/Orders/Allocations.svelte';
   import Nav from './Nav.svelte';
   import { Router, Route } from 'svelte-routing';
-  import AccountItem from './routes/AccountItem.svelte';
   import PlaceOrder from './routes/Orders/PlaceOrder.svelte';
   import CreateTransfer from './routes/Transactions/CreateTransfer.svelte';
   import CreateWithdrawal from './routes/Transactions/CreateWithdrawal.svelte';
@@ -74,7 +73,6 @@
   <Route path="/Transactions/withdrawals/create" component={CreateWithdrawal} />
   <Route path="/Transactions/conversions/create" component={CreateConversion} />
   <Route path="/Addresses" component={Addresses} />
-  <Route path="/Accounts/Item" component={AccountItem} />
   <Route path="/MarketData" component={MarketData} />
   <Route path="/Wallets" component={Wallets} />
   <Route path="/Wallets/:walletId" component={WalletId} />
