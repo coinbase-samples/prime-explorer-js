@@ -27,16 +27,15 @@ export const createAllocation = async (order_ids, size_type) => {
 
   const url = `${httpHost}:${port}/api/v1/allocations`;
   const path = `/v1/allocations`;
-  const product_id = 'ETH-USD';
+  const product_id = 'BTC-USD';
 
   const allocation_legs = [
     {
       allocation_leg_id,
       destination_portfolio_id: destinationPortfolio,
-      amount: '0.2',
+      amount: '0.1',
     },
   ];
-  console.log(allocation_legs);
   const body = {
     allocation_id,
     source_portfolio_id: portfolioId,
@@ -45,8 +44,6 @@ export const createAllocation = async (order_ids, size_type) => {
     allocation_legs,
     size_type,
   };
-
-  console.log(body);
 
   const payload = JSON.stringify(body);
 

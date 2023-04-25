@@ -59,6 +59,8 @@
       end_time: endTime,
       limit,
     };
+
+    console.log(queryParams);
     const filteredQueryParams = _.omitBy(
       queryParams,
       (v) => _.isUndefined(v) || _.isNull(v) || v === ''

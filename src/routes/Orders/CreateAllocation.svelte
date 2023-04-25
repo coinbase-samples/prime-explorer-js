@@ -4,24 +4,29 @@
   import { onMount } from 'svelte';
   import { getOrders } from '../../apis/Orders';
   import { createAllocation } from '../../apis/CreateAllocation'
+  import { generateQueryparams } from '../../utils/queryParams';
   import {
     Content,
     Form,
     Button,
     MultiSelect, 
-    TextArea
+    TextArea,
   } from 'carbon-components-svelte';
 
-  let accountId = "";
-  let productId = "";
-  let amount = 0;
+  
   let orders = [];
   let orderList;
   let payload = [];
   let selectedIds = [];
+  let showOrdersSelect = false;
+  let selectedAsset;
 
-  onMount(async () => {
-    orders = await getOrders('&start_date=2023-03-05T00:00:01Z&product_ids=ETH-USD');
+
+  // onMount(async () => {
+
+ const generateOrdersList = async (queryParams) => {
+   const params = generateQueryparams(queryParams);
+    orders = await getOrders(params);
     orderList = orders.orders.slice(0, 10);
     console.log(orderList);
     // Modify payload to include both id and text properties
@@ -31,12 +36,25 @@
         text: item.id, // Include both id and description
       };
     });
-  });
+  };
+  
+  //});
 
+  
   const alertPrompt = (result) => {
     alert('Allocation initiated', result);
      navigate('/Orders/Allocations');
   }
+
+   const handleAssetSelect = async (event) => {
+    selectedAsset = event.target.value;
+   const payload=  {
+  start_date: '2023-03-05T00:00:01Z',
+  product_ids: selectedAsset,
+};
+    await generateOrdersList(payload);
+    showOrdersSelect = true;
+  };
 
   const executeAllocation = async () => {
     // Loop through selectedIds array and retrieve text value for each selected item
@@ -53,6 +71,22 @@
 
 <Nav />
 <Content class="Layout">
+
+  <label 
+    class="mb-2 block text-sm font-bold text-gray-700"
+    for="choose-asset"><b>Choose Asset:</b></label>
+    <br />
+  <select
+     id="choose-asset" 
+     name="choose-asset"
+     class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+     bind:value={selectedAsset} 
+     on:change={handleAssetSelect}>
+  <option value="">-- Please Choose --</option>
+  <option value="BTC-USD">BTC-USD</option>
+  <option value="ETH-USD">ETH-USD</option>
+</select>
+  {#if showOrdersSelect}
   <MultiSelect
     size="xl"
     label="Select Orders to Allocate"
@@ -64,5 +98,5 @@
  
     <br />
     <Button on:click={executeAllocation}>Allocate</Button>
- 
+ {/if}
 </Content>
