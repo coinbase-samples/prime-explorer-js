@@ -35,7 +35,7 @@
 <Nav />
 <Content class="Layout">
   {#if portfolioResponse}
-    {#each portfolioResponse.portfolios as portfolio}
+  
       <main>
         <div class="px-4 pt-6">
           <div class="my-4 grid grid-cols-1 xl:gap-4 2xl:grid-cols-2">
@@ -64,7 +64,7 @@
                       <div
                         class="inline-flex items-center text-base font-semibold text-gray-900"
                       >
-                        {portfolio.id}
+                        {portfolioResponse.id}
                       </div>
                     </div>
                   </li>
@@ -85,7 +85,7 @@
                       <div
                         class="inline-flex items-center text-base font-semibold text-gray-900"
                       >
-                        {portfolio.name}
+                        {portfolioResponse.name}
                       </div>
                     </div>
                   </li>
@@ -106,7 +106,7 @@
                       <div
                         class="inline-flex items-center text-base font-semibold text-gray-900"
                       >
-                        {portfolio.entity_id}
+                        {portfolioResponse.entity_id}
                       </div>
                     </div>
                   </li>
@@ -127,7 +127,7 @@
                       <div
                         class="inline-flex items-center text-base font-semibold text-gray-900"
                       >
-                        {portfolio.organization_id}
+                        {portfolioResponse.organization_id}
                       </div>
                     </div>
                   </li>
@@ -205,7 +205,7 @@
           </div>
         </div>
       </main>
-    {/each}
+   
     <PortfolioBalance />
   {/if}
   

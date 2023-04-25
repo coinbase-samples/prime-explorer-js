@@ -16,7 +16,6 @@
 import { fetchStore } from '../stores/userSession-store';
 import { v4 as uuidv4 } from 'uuid';
 import { makeCall } from './PrimeClient';
-import _ from 'lodash-es';
 
 let allocations;
 let result;
@@ -54,11 +53,16 @@ export const getAllocations = async (queryParams) => {
       root_id: 'id',
     };
 
-    result = await allocations.map(function (o) {
-      return _.mapKeys(o, function (v, k) {
-        return k in keys ? keys[k] : k;
-      });
-    });
+   result = await Promise.all(
+  allocations.map(function(o) {
+    const mappedObj = {};
+    for (const [key, value] of Object.entries(o)) {
+      mappedObj[keys[key] || key] = value;
+    }
+    return mappedObj;
+  })
+);
+
 
     return result;
   } catch (e) {

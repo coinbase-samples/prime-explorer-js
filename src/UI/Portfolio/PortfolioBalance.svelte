@@ -35,6 +35,7 @@
       return item.amount;
     });
 
+
     const formatMoney = (totalBalance) => {
       return totalBalance.toLocaleString('en-US');
     };

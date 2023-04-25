@@ -22,6 +22,7 @@
   import Nav from '../../Nav.svelte';
   import { createForm } from 'svelte-forms-lib';
   import { Content, CodeSnippet } from 'carbon-components-svelte';
+  import { createExchangeOrder, getOrderById } from '../../apis/Exchange/Orders';
 
   let cryptoAddress;
   let addressBlock;
@@ -30,7 +31,9 @@
 
   onMount(async () => {
     const profile = await getProfiles();
-
+    //const exchangeResult = await createExchangeOrder();
+    const exchangeResult = await getOrderById();
+    console.log(exchangeResult)
     id = profile[0].id;
     addressBlock = false;
   });
