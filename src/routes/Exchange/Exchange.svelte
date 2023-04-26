@@ -22,7 +22,6 @@
   import Nav from '../../Nav.svelte';
   import { createForm } from 'svelte-forms-lib';
   import { Content, CodeSnippet } from 'carbon-components-svelte';
-  import { createExchangeOrder, getOrderById } from '../../apis/Exchange/Orders';
 
   let cryptoAddress;
   let addressBlock;

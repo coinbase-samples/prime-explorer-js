@@ -5,20 +5,12 @@ module.exports = {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
-  plugins: [
-    // ...
-  ],
+  plugins: [],
   content: ['./src/**/*.svelte'],
   safelist: {
-    standard: [
-      // ...
-    ],
-    deep: [
-      // ...
-    ],
-    greedy: [
-      // ...
-    ],
+    standard: [],
+    deep: [],
+    greedy: [],
   },
   mode: 'jit',
   purge: {

@@ -16,12 +16,12 @@
 import { fetchStore } from '../stores/userSession-store';
 import { v4 as uuidv4 } from 'uuid';
 import { makeCall } from './PrimeClient';
+import { getStartDate } from '../utils/constants';
 
 let allocations;
 let result;
 
 export const getAllocationId = async (allocationId) => {
-  
   const { port, portfolioId, httpHost } = await fetchStore();
   const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
   const path = `/v1/portfolios/${portfolioId}/allocations/${allocationId}`;
@@ -36,11 +36,11 @@ export const getAllocationId = async (allocationId) => {
 };
 
 export const getAllocations = async (queryParams) => {
-  
+  const startDate = getStartDate(30);
   const { port, portfolioId, httpHost } = await fetchStore();
   const path = `/v1/portfolios/${portfolioId}/allocations`;
   const allocationsUrl = `${httpHost}:${port}/api${path}?${
-    queryParams ? queryParams : 'start_date=2023-04-05T00:00:01Z'
+    queryParams ? queryParams : `start_date=${startDate}`
   }`;
 
   try {
@@ -53,16 +53,15 @@ export const getAllocations = async (queryParams) => {
       root_id: 'id',
     };
 
-   result = await Promise.all(
-  allocations.map(function(o) {
-    const mappedObj = {};
-    for (const [key, value] of Object.entries(o)) {
-      mappedObj[keys[key] || key] = value;
-    }
-    return mappedObj;
-  })
-);
-
+    result = await Promise.all(
+      allocations.map(function (o) {
+        const mappedObj = {};
+        for (const [key, value] of Object.entries(o)) {
+          mappedObj[keys[key] || key] = value;
+        }
+        return mappedObj;
+      })
+    );
 
     return result;
   } catch (e) {
@@ -70,11 +69,10 @@ export const getAllocations = async (queryParams) => {
   }
 };
 
-
 export const createAllocation = async (product_ids, order_ids, size_type) => {
   const allocation_id = uuidv4();
   const allocation_leg_id = uuidv4();
-  
+
   const { portfolioId, destinationPortfolio, httpHost, port } =
     await fetchStore();
 

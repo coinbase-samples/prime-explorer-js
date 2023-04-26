@@ -61,15 +61,7 @@
     ordersFilterView = true;
   };
 
-  // const updateOrders = async () => {
-  //   try {
-  //     const filteredOrders = await getOrders(stringifiedQueryParams);
-  //     ordersFilter = filteredOrders.orders;
-  //     ordersFilterView = true;
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
+
 
   const submitForm = async (
     product_ids,
@@ -92,10 +84,10 @@
       end_date,
     };
 
-     const stringifiedQueryParams = generateQueryparams(queryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
     
-     ordersFilter = await getOrders(stringifiedQueryParams);
-     ordersFilterView = true;
+    ordersFilter = await getOrders(stringifiedQueryParams);
+    ordersFilterView = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({

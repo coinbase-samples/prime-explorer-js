@@ -11,7 +11,7 @@
     MultiSelect, 
     TextArea,
   } from 'carbon-components-svelte';
-  import { getAvaialableAllocationsDate } from '../../utils/constants';
+  import { getStartDate } from '../../utils/constants';
 
   
   let orders = [];
@@ -25,10 +25,8 @@
   let selectedSide;
 
 
-  // onMount(async () => {
 
  const generateOrdersList = async (queryParams) => {
-  //72 hours time cap
    const params = generateQueryparams(queryParams);
     orders = await getOrders(params);
     orderList = orders.orders.slice(0, 10);
@@ -41,7 +39,7 @@
     });
   };
   
- const startDate = getAvaialableAllocationsDate(3);
+ const startDate = getStartDate(3);
  console.log(startDate);
   
   const alertPrompt = (result) => {
@@ -49,12 +47,12 @@
      navigate('/Orders/Allocations');
   }
 
-   const handleAssetSelect = async () => {
-    // selectedAsset = event.target.value;
-   const queryParams=  {
-  start_date: startDate,
-  product_ids: selectedAsset,
-  order_side: selectedSide,
+  const handleAssetSelect = async () => {
+  
+  const queryParams=  {
+    start_date: startDate,
+    product_ids: selectedAsset,
+    order_side: selectedSide,
 
 };
     await generateOrdersList(queryParams);
