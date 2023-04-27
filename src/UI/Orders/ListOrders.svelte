@@ -33,7 +33,6 @@
   let ordersFilter;
   let ordersForm = false;
   let ordersFilterView = false;
-  let stringifiedQueryParams;
   let totalOrderItems;
   let paginatedOrders;
   let next_cursor;

@@ -17,9 +17,8 @@
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
   import { getTransactions } from '../../apis/Transactions';
-  import { Content, Button, OutboundLink } from 'carbon-components-svelte';
+  import { Content, Button, OutboundLink, DataTable, Link } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
-  import { DataTable, Link } from 'carbon-components-svelte';
   import { generateQueryparams } from '../../utils/queryParams';
 
   let transactions;

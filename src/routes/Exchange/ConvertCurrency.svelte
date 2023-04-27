@@ -59,7 +59,7 @@
     on:submit={handleSubmit}
     class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
   >
-    <label htmlFor="type" class="mb-2 block text-sm font-bold text-gray-700"
+    <label for="type" class="mb-2 block text-sm font-bold text-gray-700"
       ><b>Convert a Currency:</b></label
     ><br />
     <label for="profile_id">Profile Id</label><br />

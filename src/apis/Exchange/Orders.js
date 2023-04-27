@@ -14,6 +14,7 @@ export const createExchangeOrder = async (
   side,
   type,
   size,
+  time_in_force_text,
   limit_price
 ) => {
   const { port, httpHost } = await fetchStore();
@@ -26,6 +27,7 @@ export const createExchangeOrder = async (
     side,
     type,
     size,
+    time_in_force: time_in_force_text,
     price: limit_price,
   };
 
@@ -51,8 +53,6 @@ export const getOrderById = async (orderId) => {
     const fetchOrderById = await makeCall('GET', url, path, '');
 
     const orderDetails = await fetchOrderById.json();
-
-    //const finalResponse = renameKey(orderDetails);
 
     return orderDetails;
   } catch (e) {

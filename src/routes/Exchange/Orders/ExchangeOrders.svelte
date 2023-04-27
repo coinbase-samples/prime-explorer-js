@@ -16,14 +16,13 @@
    */
 
   import { onMount } from 'svelte';
-  import {getOrderById, getOrderFills} from '../../../apis/Exchange/Orders';
+  import { getOrderFills} from '../../../apis/Exchange/Orders';
   import Nav from '../../../Nav.svelte';
   import {
     Button,
     DataTable,
     Link,
     OutboundLink,
-    Pagination,
     Content
   } from 'carbon-components-svelte';
   import { createForm } from 'svelte-forms-lib';
@@ -158,6 +157,7 @@
       headers={[
         { key: 'id', value: 'Order Id' },
         { key: 'settled', value: 'Settled' },
+        { key: 'type', value: 'Type' },
         { key: 'product_id', value: 'Product Id' },
         { key: 'side', value: 'Side' },
         { key: 'price', value: 'Price' },
@@ -185,6 +185,7 @@
       headers={[
         { key: 'id', value: 'Order Id' },
         { key: 'settled', value: 'Settled' },
+        { key: 'type', value: 'Type' },
         { key: 'product_id', value: 'Product Id' },
         { key: 'side', value: 'Side' },
         { key: 'price', value: 'Price' },

@@ -18,8 +18,7 @@
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
   import { getAddressBook } from '../apis/AddressBook';
-  import { Content, Button, OutboundLink } from 'carbon-components-svelte';
-  import { DataTable, Link } from 'carbon-components-svelte';
+  import { Content, Button, OutboundLink, DataTable, Link } from 'carbon-components-svelte';
   import CreateAddressForm from './CreateAddressForm.svelte';
   import { generateQueryparams } from '../utils/queryParams';
 

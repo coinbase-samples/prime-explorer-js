@@ -69,7 +69,7 @@
               <span
                 class="text-thumeza-500 flex transform items-center justify-center space-x-3 transition-all duration-1000 ease-out"
               >
-                <img class="h-28 w-28" src="/coinLogo.png" />
+                <img class="h-28 w-28" alt="logo" src="/coinLogo.png" />
               </span>
             </div>
           </div>

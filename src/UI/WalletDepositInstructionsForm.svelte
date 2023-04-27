@@ -50,7 +50,6 @@
   class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
 >
   <label
-    htmlFor="type"
     class="mb-2 block text-sm font-bold text-gray-700"
     for="type"><b>Deposit Type</b></label
   ><br />

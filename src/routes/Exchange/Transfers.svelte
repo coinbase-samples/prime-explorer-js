@@ -16,7 +16,7 @@
      */
   
     import { onMount } from 'svelte';
-    import { Content, DataTable, Link } from 'carbon-components-svelte';
+    import { Content, DataTable } from 'carbon-components-svelte';
     import { getTransfers } from '../../apis/Exchange/Transfers';
     import Nav from '../../Nav.svelte';
   

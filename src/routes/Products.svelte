@@ -20,7 +20,7 @@
   import ProductsList from '../UI/ProductsList.svelte';
   import { Content } from 'carbon-components-svelte';
 
-  export let orderForm = false;
+  export const orderForm = false;
 </script>
 
 <Nav />

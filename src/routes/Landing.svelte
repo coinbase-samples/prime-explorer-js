@@ -46,7 +46,7 @@
                 </h3>
               </div>
               <div class="flow-root">
-                <ul role="list" class="divide-y divide-gray-200">
+                <ul class="divide-y divide-gray-200">
                   <li class="py-3 sm:py-4">
                     <div class="flex items-center space-x-4">
                       <div class="flex-shrink-0">

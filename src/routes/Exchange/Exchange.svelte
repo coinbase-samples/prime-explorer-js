@@ -61,9 +61,9 @@
     class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
   >
     <label
-      htmlFor="type"
+      for="cryptoAddress"
       class="mb-2 block text-sm font-bold text-gray-700"
-      for="address"><b>Generate Crypto Address:</b></label
+      ><b>Generate Crypto Address:</b></label
     ><br />
     <select
       id="address"

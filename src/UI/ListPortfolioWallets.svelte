@@ -34,7 +34,6 @@
   let WalletsFilterView = false;
   let WalletsFilter;
   let queryParams;
-  let stringifiedQueryParams;
 
   onMount(async () => {
     portfolioWallets = await getPortfolioWallets();

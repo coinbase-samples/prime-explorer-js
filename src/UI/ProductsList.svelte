@@ -15,12 +15,11 @@
    * limitations under the License.
    */
 
-  import { Content, Button } from 'carbon-components-svelte';
+  import { Content, Button, DataTable } from 'carbon-components-svelte';
   import { createForm } from 'svelte-forms-lib';
 
   import { onMount } from 'svelte';
   import Nav from '../Nav.svelte';
-  import { DataTable } from 'carbon-components-svelte';
   import { getProducts } from '../apis/Products';
   import queryString from 'querystring';
   import _ from 'lodash-es';

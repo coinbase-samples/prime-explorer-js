@@ -16,10 +16,8 @@
    */
 
   import 'carbon-components-svelte/css/white.css';
-  import { Tile, CodeSnippet } from 'carbon-components-svelte';
+  import { Tile, CodeSnippet, Content } from 'carbon-components-svelte';
   import Nav from '../Nav.svelte';
-
-  import { Content } from 'carbon-components-svelte';
   import { onMount } from 'svelte';
   import { getTransactionId } from '../apis/Transactions';
 

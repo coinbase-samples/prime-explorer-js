@@ -20,11 +20,9 @@
   import {
     Dropdown,
     Content,
-    Checkbox,
     Form,
     TextInput,
     Button,
-    CodeSnippet,
     Modal,
   } from 'carbon-components-svelte';
   import { createExchangeOrder } from '../../../apis/Exchange/Orders';
@@ -53,9 +51,9 @@
     { id: '4', text: 'DOGE-USD' }
   ];
   const time_in_force_items = [
-    { id: '0', text: 'GOOD_UNTIL_DATE_TIME' },
-    { id: '1', text: 'GOOD_UNTIL_CANCELLED' },
-    { id: '2', text: 'IMMEDIATE_OR_CANCEL' },
+    { id: '0', text: 'GTC' },
+    { id: '1', text: 'GTT' },
+    { id: '2', text: 'FOK' },
   ];
 
   const side_items = [
@@ -77,7 +75,7 @@
   $: time_in_force_text =
     time_in_force_type >= 0
       ? time_in_force_items[time_in_force_type].text
-      : 'GOOD_UNTIL_DATE_TIME';
+      : 'FOK';
 
   const handleSubmit = async (event) => {
     const isFormValid = validateForm();
@@ -98,9 +96,11 @@
       side_text,
       order_type_text,
       orderSize,
+      time_in_force_text,
       limit_price,
       cancel_after,
-      display_base_size
+      display_base_size,
+     
     );
 
     const orderId = response.id;
@@ -174,6 +174,13 @@
       required
       items={order_type_items}
     /><br />
+    <Dropdown
+      bind:selectedIndex={time_in_force_type}
+      titleText="Time in force type"
+      placeholder="Time in force type placeholder"
+      required
+      items={time_in_force_items}
+    /><br />
     {#if order_type_text === 'limit'}
       <TextInput
         bind:value={limit_price}
@@ -181,23 +188,13 @@
         placeholder="limit price"
         type="integer"
       /> <br />
-     
-
-      <Dropdown
-        bind:selectedIndex={time_in_force_type}
-        titleText="time_in_force Type"
-        placeholder="time_in_force Type"
-        required
-        items={time_in_force_items}
-      /><br />
-     
-        <TextInput
-          bind:value={display_base_size}
-          labelText="Display Base Size"
-          placeholder="display_base_size"
-          type="display_base_size"
-        /> <br />
-      
+    <TextInput
+        bind:value={display_base_size}
+        labelText="Display Base Size"
+        placeholder="display_base_size"
+        type="display_base_size"
+    /> <br />
+    
       <TextInput
         bind:value={cancel_after}
         labelText="cancel_after"

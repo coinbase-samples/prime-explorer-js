@@ -17,12 +17,10 @@
 
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getWalletTransactions } from '../../apis/Wallets';
-  import { Content, Button } from 'carbon-components-svelte';
+  import { Content, Button, DataTable, Link } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
-  import { DataTable, Link } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
+  import { generateQueryparams } from '../../utils/queryParams';
 
   export let walletId;
   let walletTransactions;
@@ -52,12 +50,8 @@
       end_time: endTime,
       limit,
     };
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+   
+    const stringifiedQueryParams = generateQueryparams(queryParams);
     WalletTransactionsFilter = await getWalletTransactions(
       walletId,
       stringifiedQueryParams

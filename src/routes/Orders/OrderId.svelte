@@ -17,11 +17,9 @@
 
   import 'carbon-components-svelte/css/white.css';
   import { getOrderId, cancelOrder } from '../../apis/Orders';
-  import { Tile, CodeSnippet, Content } from 'carbon-components-svelte';
+  import { Tile, CodeSnippet, Content, Button, Modal } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
-  import { Button, Modal } from 'carbon-components-svelte';
   import { navigate } from 'svelte-routing';
-
   import { onMount } from 'svelte';
 
   let orderIdDetails;
@@ -78,7 +76,7 @@
               <span
                 class="text-thumeza-500 flex transform items-center justify-center space-x-3 transition-all duration-1000 ease-out"
               >
-                <img class="h-28 w-28" src="/coinLogo.png" />
+                <img class="h-28 w-28" alt="logo" src="/coinLogo.png" />
               </span>
             </div>
           </div>

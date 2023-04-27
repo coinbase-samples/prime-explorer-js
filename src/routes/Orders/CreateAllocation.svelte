@@ -6,10 +6,8 @@
   import { generateQueryparams } from '../../utils/queryParams';
   import {
     Content,
-    Form,
     Button,
     MultiSelect, 
-    TextArea,
   } from 'carbon-components-svelte';
   import { getStartDate } from '../../utils/constants';
 
