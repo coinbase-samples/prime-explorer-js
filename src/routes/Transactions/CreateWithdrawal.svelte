@@ -55,7 +55,7 @@
     initiateTransferResponse = JSON.stringify(initiateWithdrawalPost);
     if (activityId) {
       transferAPIResponse = true;
-      alert('Transfer initiated, your Activity Id is: ' + activityId);
+      alert(`Transfer initiated, your Activity Id is: ${activityId}`);
       navigate(`/Activities/${activityId}`);
     }
   };

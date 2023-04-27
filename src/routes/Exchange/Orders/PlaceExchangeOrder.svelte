@@ -106,7 +106,7 @@
     const orderId = response.id;
     if (response) {
       open = false;
-      alert('Order initiated, your Order id is: ' + orderId);
+      alert(`Order initiated, your Order id is: ${orderId}`);
       navigate(`/Exchange/Orders/${orderId}`);
     }
   };
