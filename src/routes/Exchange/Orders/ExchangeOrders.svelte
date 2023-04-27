@@ -38,14 +38,9 @@
   onMount(async () => {
 
     orders = await getOrderFills();
-    console.log(orders)
     loaded = true;
 
   });
-
- 
-
-
 
   const submitForm = async (
     product_id,

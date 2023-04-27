@@ -48,7 +48,9 @@
     { id: '1', text: 'ETH-USD' },
     { id: '2', text: 'SOL-USD' },
     { id: '3', text: 'MATIC-USD' },
-    { id: '4', text: 'DOGE-USD' }
+    { id: '4', text: 'DOGE-USD' },
+    { id: '5', text: 'LINK-USD' }
+
   ];
   const time_in_force_items = [
     { id: '0', text: 'GTC' },
@@ -90,7 +92,6 @@
   };
 
   const finalRequest = async () => {
-    console.log(limit_price);
     const response = await createExchangeOrder(
       product_id_text,
       side_text,

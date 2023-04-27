@@ -38,7 +38,6 @@
   };
   
  const startDate = getStartDate(3);
- console.log(startDate);
   
   const alertPrompt = (result) => {
     alert('Allocation initiated', result);
@@ -64,7 +63,6 @@
       return payload.find(item => item.id === id).text;
     });
 
-    console.log(selectedItems);
     const result = await createAllocation(selectedAsset, selectedItems, "PERCENT");
     alertPrompt(result)
 
