@@ -140,6 +140,16 @@
         href="/Exchange"
         on:click={(event) => routeTo(event, '/Exchange')}
       />
+       <SideNavMenuItem
+        text="Orders"
+        href="/Exchange/Orders"
+        on:click={(event) => routeTo(event, '/Exchange/Orders')}
+      />
+      <SideNavMenuItem
+        text="Place Order"
+        href="/Exchange/Orders/Create"
+        on:click={(event) => routeTo(event, '/Exchange/Orders/Create')}
+      />
       <SideNavMenuItem
         href="/Exchange/Withdrawals"
         text="Withdrawals"
