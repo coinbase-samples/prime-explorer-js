@@ -13,8 +13,8 @@ export const createExchangeOrder = async (
   product_id,
   side,
   type,
-  base_quantity,
-  time_in_force_text
+  size,
+  limit_price
 ) => {
   const { port, httpHost } = await fetchStore();
 
@@ -22,11 +22,11 @@ export const createExchangeOrder = async (
   const path = `/orders`;
 
   const body = {
-    type,
-    side,
     product_id,
-    time_in_force_text,
-    size: base_quantity,
+    side,
+    type,
+    size,
+    price: limit_price,
   };
 
   const payload = JSON.stringify(body);

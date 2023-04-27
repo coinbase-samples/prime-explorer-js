@@ -43,9 +43,9 @@
       ]}
       rows={payments}
     >
-      <strong slot="title">getPaymentMethods List</strong>
+      <strong slot="title">Payment Methods List</strong>
       <span slot="description" style="font-size: 1rem">
-        Retrieve getPaymentMethods
+        Retrieve PaymentMethods
       </span>
       <span slot="cell" let:row let:cell>
         {#if cell.key === 'id' && cell.value}
