@@ -112,7 +112,7 @@
     if (response) {
       open = false;
       alert('Order initiated, your Order id is: ' + orderId);
-      navigate(`/Orders/${orderId}`);
+      navigate(`/Exchange/Orders/${orderId}`);
     }
   };
 </script>
