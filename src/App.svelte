@@ -34,7 +34,8 @@
   import Wallets from './routes/Wallets/Wallets.svelte';
   import WalletId from './routes/Wallets/WalletId.svelte';
   import Exchange from './routes/Exchange/Exchange.svelte';
-  import ExchangeOrders from './routes/Exchange/Orders/ExchangeOrders.svelte';
+  import ExchangeFills from './routes/Exchange/Orders/ExchangeFills.svelte';
+  import ExchangeOpenOrders from './routes/Exchange/Orders/ExchangeOpenOrders.svelte';
   import ExchangeOrderId from './routes/Exchange/Orders/ExchangeOrderId.svelte';
   import PlaceExchangeOrder from './routes/Exchange/Orders/PlaceExchangeOrder.svelte';
   import Withdrawals from './routes/Exchange/Withdrawals.svelte';
@@ -83,7 +84,8 @@
   <Route path="/Activities" component={Activities} />
   <Route path="/Activities/:activityId" component={ActivityId} />
   <Route path="/Exchange" exact component={Exchange} />
-  <Route path="/Exchange/Orders" exact component={ExchangeOrders} />
+  <Route path="/Exchange/Orders/Fills" exact component={ExchangeFills} />
+  <Route path="/Exchange/Orders/Open" exact component={ExchangeOpenOrders} />
   <Route path="/Exchange/Orders/:orderId" exact component={ExchangeOrderId} />
   <Route
     path="/Exchange/Orders/Create"

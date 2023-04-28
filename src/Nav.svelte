@@ -144,8 +144,13 @@
       <SideNavMenu text="Orders">
        <SideNavMenuItem
         text="Order Fills"
-        href="/Exchange/Orders"
-        on:click={(event) => routeTo(event, '/Exchange/Orders')}
+        href="/Exchange/Orders/Fills"
+        on:click={(event) => routeTo(event, '/Exchange/Orders/Fills')}
+      />
+      <SideNavMenuItem
+        text="Open Orders"
+        href="/Exchange/Orders/Open"
+        on:click={(event) => routeTo(event, '/Exchange/Orders/Open')}
       />
       <SideNavMenuItem
         text="Place Order"

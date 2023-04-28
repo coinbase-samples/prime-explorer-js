@@ -80,3 +80,22 @@ export const getOrderFills = async (queryParams) => {
     return e;
   }
 };
+
+export const getOpenOrders = async (queryParams) => {
+  const { port, httpHost } = await fetchStore();
+  const ordersUrl = `${httpHost}:${port}/api/exchange/orders?${
+    queryParams ? queryParams : ''
+  }`;
+
+  const path = `/orders?${queryParams ? queryParams : ''}`;
+
+  try {
+    const fetchOpenOrders = await makeCall('GET', ordersUrl, path, '');
+
+    const openOrdersResponse = await fetchOpenOrders.json();
+
+    return openOrdersResponse;
+  } catch (e) {
+    return e;
+  }
+};
