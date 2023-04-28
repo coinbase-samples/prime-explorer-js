@@ -52,6 +52,9 @@
     { id: '0', text: 'BTC-USD' },
     { id: '1', text: 'ETH-USD' },
     { id: '2', text: 'SOL-USD' },
+    { id: '3', text: 'MATIC-USD' },
+    { id: '4', text: 'DOGE-USD' },
+    { id: '5', text: 'LINK-USD' }
   ];
   const time_in_force_items = [
     { id: '0', text: 'GOOD_UNTIL_DATE_TIME' },
