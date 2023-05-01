@@ -27,7 +27,8 @@
     Pagination,
   } from 'carbon-components-svelte';
   import { createForm } from 'svelte-forms-lib';
-    import { generateQueryparams } from '../../utils/queryParams';
+  import { generateQueryparams } from '../../utils/queryParams';
+  import { getStartDate } from '../../utils/constants';
 
   let orders;
   let ordersFilter;
@@ -38,6 +39,7 @@
   let next_cursor;
   let has_next = false;
   let loaded;
+  let start_date = getStartDate(3);
 
   onMount(async () => {
     orders = await getOrders();
@@ -54,7 +56,7 @@
   const nextPaginationSet = async () => {
     if (has_next)
       paginatedOrders = await getOrders(
-        `start_date=2022-06-25T00:59:59Z&cursor=${next_cursor}`
+        `start_date=${start_date}=${next_cursor}`
       );
     ordersFilter = paginatedOrders.orders;
     ordersFilterView = true;
@@ -92,7 +94,7 @@
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
       product_ids: 'BTC-USD',
-      start_date: '2021-12-05T14:48:00Z',
+      start_date,
       order_side: 'BUY'
     },
     onSubmit: (values) => {
@@ -163,6 +165,9 @@
           <option />
           <option>BTC-USD</option>
           <option>ETH-USD</option>
+          <option>SOL-USD</option>
+          <option>MATIC-USD</option>
+          <option>DOGE-USD</option>
         </select>
         <label
           class="mb-2 block text-sm font-bold text-gray-700"
