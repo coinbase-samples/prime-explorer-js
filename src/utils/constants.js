@@ -30,3 +30,33 @@ export const getEndDate = (daysFwd) => {
   console.log(endDate);
   return endDate;
 };
+
+export const assetsMenuList = [
+  'BTC-USD',
+  'ETH-USD',
+  'MATIC-USD',
+  'DOGE-USD',
+  'USDT-USD',
+  'DAI-USD',
+  'WBTC-USD',
+  'AAVE-USD',
+  'UNI-USD',
+  'LINK-USD',
+  'SUSHI-USD',
+  'YFI-USD',
+  'MKR-USD',
+  'SNX-USD',
+  'COMP-USD',
+  'CRV-USD',
+  'BAL-USD',
+  'REN-USD',
+  'UMA-USD',
+  '1INCH-USD',
+  'ALCX-USD',
+  'BNT-USD',
+  'CEL-USD',
+  'ENJ-USD',
+  'GRT-USD',
+  'KNC-USD',
+  'OMG-USD',
+];

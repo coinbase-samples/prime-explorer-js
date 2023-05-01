@@ -18,6 +18,7 @@
   import { getProfiles } from '../../apis/Exchange/Profiles';
   import { CreateCryptoAddress } from '../../apis/Exchange/GenerateACryptoAddress';
   import { onMount } from 'svelte';
+  import { assetsMenuList } from '../../utils/constants';
   import 'carbon-components-svelte/css/white.css';
   import Nav from '../../Nav.svelte';
   import { createForm } from 'svelte-forms-lib';
@@ -72,10 +73,9 @@
       on:change={handleChange}
       bind:value={$form.address}
     >
-      <option />
-      <option>BTC</option>
-      <option>ETH</option>
-      <option>AXS</option>
+     {#each assetsMenuList as asset}
+          <option>{asset}</option>
+     {/each}
     </select>
     <button
       class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"

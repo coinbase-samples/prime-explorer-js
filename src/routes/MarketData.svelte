@@ -18,7 +18,7 @@
   import { getSocketSignature } from '../apis/CoinbaseAuth';
   import { onMount } from 'svelte';
   import { Content, Button, OutboundLink } from 'carbon-components-svelte';
-
+  import { assetsMenuList } from '../utils/constants';
   import { createForm } from 'svelte-forms-lib';
   import { fetchStore } from '../stores/userSession-store';
 
@@ -203,10 +203,9 @@
           on:change={handleChange}
           bind:value={$form.product}
         >
-          <option>BTC-USD</option>
-          <option>ETH-USD</option>
-          <option>SOL-USD</option>
-          <option>USDT-USD</option>
+         {#each assetsMenuList as asset}
+          <option>{asset}</option>
+          {/each}
         </select>
         <br /><br />
 

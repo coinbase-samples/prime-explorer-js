@@ -17,6 +17,7 @@
 
   import { onMount } from 'svelte';
   import { getOpenOrders} from '../../../apis/Exchange/Orders';
+  import { assetsMenuList } from '../../../utils/constants';
   import Nav from '../../../Nav.svelte';
   import {
     Button,
@@ -113,13 +114,9 @@
           on:change={handleChange}
           bind:value={$form.product_id}
         >
-          <option />
-          <option>BTC-USD</option>
-          <option>ETH-USD</option>
-          <option>MATIC-USD</option>
-          <option>DOGE-USD</option>
-          <option>ADA-USD</option>
-
+         {#each assetsMenuList as asset}
+          <option>{asset}</option>
+          {/each}
         </select>
 
        
