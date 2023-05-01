@@ -36,10 +36,8 @@
   let loaded;
 
   onMount(async () => {
-
     orders = await getOpenOrders();
     loaded = true;
-
   });
 
   const submitForm = async (
