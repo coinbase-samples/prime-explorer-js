@@ -36,6 +36,17 @@
   
   let loaded;
 
+  const columnNames = [
+        { key: 'id', value: 'Order Id' },
+        { key: 'settled', value: 'Settled' },
+        { key: 'type', value: 'Type' },
+        { key: 'product_id', value: 'Product Id' },
+        { key: 'side', value: 'Side' },
+        { key: 'price', value: 'Price' },
+        { key: 'created_at', value: 'Created At' },
+        { key: 'size', value: 'Size' },
+      ]
+
   onMount(async () => {
     orders = await getOpenOrders();
     loaded = true;
@@ -102,7 +113,6 @@
           bind:value={$form.order_id}
          />
          
-        
          <label
           class="mb-2 block text-sm font-bold text-gray-700"
           for="product_id"><b>Product Ids: </b></label
@@ -118,8 +128,7 @@
           <option>{asset}</option>
           {/each}
         </select>
-
-       
+               
         <br /><br />
         <Button
           class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
@@ -144,16 +153,7 @@
   {#if ordersFilterView} 
      <DataTable
       size="short"
-      headers={[
-        { key: 'id', value: 'Order Id' },
-        { key: 'settled', value: 'Settled' },
-        { key: 'type', value: 'Type' },
-        { key: 'product_id', value: 'Product Id' },
-        { key: 'side', value: 'Side' },
-        { key: 'price', value: 'Price' },
-        { key: 'created_at', value: 'Created At' },
-        { key: 'size', value: 'Size' },
-      ]}
+      headers={columnNames}
       rows={ordersFilter}
     >
       <strong slot="title">Filtered Orders List</strong>
@@ -172,16 +172,7 @@
    {:else} 
     <DataTable
       size="short"
-      headers={[
-        { key: 'id', value: 'Order Id' },
-        { key: 'settled', value: 'Settled' },
-        { key: 'type', value: 'Type' },
-        { key: 'product_id', value: 'Product Id' },
-        { key: 'side', value: 'Side' },
-        { key: 'price', value: 'Price' },
-        { key: 'created_at', value: 'Created At' },
-        { key: 'size', value: 'Size' },
-      ]}
+      headers={columnNames}
       rows={orders}
     >
       <strong slot="title">Exchange Open Orders List</strong>
