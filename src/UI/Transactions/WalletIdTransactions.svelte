@@ -21,6 +21,7 @@
   import { Content, Button, DataTable, Link } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
   import { generateQueryparams } from '../../utils/queryParams';
+  import { getEndDate, getStartDate } from '../../utils/constants';
 
   export let walletId;
   let walletTransactions;
@@ -61,8 +62,8 @@
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
-      start_time: '2022-06-05T14:48:00.000Z',
-      end_time: '2022-10-06T14:48:00.000Z',
+      start_time: getStartDate(3),
+      end_time: getEndDate(5),
       limit: '2',
       sort_direction: 'ASC',
     },

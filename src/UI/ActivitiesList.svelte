@@ -29,6 +29,7 @@
   import { createForm } from 'svelte-forms-lib';
   import { getActivities } from '../apis/Activities';
   import Nav from '../Nav.svelte';
+  import { getEndDate, getStartDate } from '../utils/constants';
 
   let activities;
   let activitiesFilter;
@@ -68,8 +69,8 @@
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
-      start_time: '2022-05-05T14:48:00.000Z',
-      end_time: '2022-05-25T14:48:00.000Z',
+      start_time: getStartDate(30),
+      end_time: getEndDate(0),
       limit: '20',
       order: 'ASC',
       status: 'CANCELLED',

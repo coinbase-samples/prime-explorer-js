@@ -24,7 +24,7 @@ export const getStartDate = (daysAgo) => {
 
 export const getEndDate = (daysFwd) => {
   const date = new Date();
-  date.setDate(date.getDate() - daysFwd);
+  date.setDate(date.getDate() + daysFwd);
   const endDate = date.toISOString();
 
   console.log(endDate);

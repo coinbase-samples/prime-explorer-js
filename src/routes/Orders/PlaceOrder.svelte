@@ -28,6 +28,7 @@
     Modal,
   } from 'carbon-components-svelte';
   import { createOrder, createOrderPreview } from '../../apis/Orders';
+  import { getEndDate, getStartDate } from '../../utils/constants';
 
   let open = false;
   let limit_price;
@@ -66,8 +67,8 @@
     { id: '0', text: 'BUY' },
     { id: '1', text: 'SELL' },
   ];
-  let start_time = '2022-07-31T09:59:59Z';
-  let expiry_time = '2022-08-02T09:59:59Z';
+  let start_time = getStartDate(1);
+  let expiry_time = getEndDate(3);
 
   const validateForm = () => {
     const isValid = orderSize !== '' && order_type !== '';
