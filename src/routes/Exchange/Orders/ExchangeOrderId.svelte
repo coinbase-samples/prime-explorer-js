@@ -22,9 +22,7 @@
 
   import { onMount } from 'svelte';
 
-  let orderIdDetails;
-  let payload;
-  let date, user_id, product_id, side, type, status;
+  let date, user_id, product_id, side, type, status, payload, orderIdDetails;
   let codeSnippet = false;
 
   export let orderId;
