@@ -17,6 +17,7 @@
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
   import { getTransactions } from '../../apis/Transactions';
+  import { getStartDate, getEndDate } from '../../utils/constants';
   import {
     Content,
     Button,
@@ -56,8 +57,8 @@
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
-      start_time: '2022-06-05T14:48:00.000Z',
-      end_time: '2022-10-06T14:48:00.000Z',
+      start_time: getStartDate(30),
+      end_time: getEndDate(5),
       limit: '2',
       order: 'ASC',
     },
