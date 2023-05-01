@@ -98,7 +98,7 @@
       <div class="mb-4">
         <form
           on:submit={handleSubmit}
-          class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+          class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
         >
           <label
             class="mb-2 block text-sm font-bold text-gray-700"
@@ -107,7 +107,7 @@
           <select
             id="categories"
             name="categories"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.categories}
           >
@@ -125,7 +125,7 @@
           <select
             id="status"
             name="status"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.status}
           >
@@ -143,7 +143,7 @@
           <input
             id="order"
             name="order"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.order}
           />
@@ -157,7 +157,7 @@
             name="start_time"
             on:change={handleChange}
             bind:value={$form.start_time}
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           />
           <label
             class="mb-2 block text-sm font-bold text-gray-700"
@@ -167,7 +167,7 @@
           <input
             id="end_time"
             name="end_time"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.end_time}
           />
@@ -178,7 +178,7 @@
           <input
             id="limit"
             name="limit"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.limit}
           />
@@ -186,12 +186,12 @@
 
           <br /><br />
           <Button
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             type="submit">Submit</Button
           >
           <Button
             on:click={closeForm}
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             >Close</Button
           >
         </form>
@@ -200,7 +200,7 @@
     {:else}
       <Button
         on:click={() => (activitiesForm = true)}
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Filter Activities</Button
       >
     {/if}

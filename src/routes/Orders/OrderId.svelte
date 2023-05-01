@@ -17,7 +17,13 @@
 
   import 'carbon-components-svelte/css/white.css';
   import { getOrderId, cancelOrder } from '../../apis/Orders';
-  import { Tile, CodeSnippet, Content, Button, Modal } from 'carbon-components-svelte';
+  import {
+    Tile,
+    CodeSnippet,
+    Content,
+    Button,
+    Modal,
+  } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
   import { navigate } from 'svelte-routing';
   import { onMount } from 'svelte';
@@ -99,7 +105,7 @@
               <div class="">
                 <button
                   on:click={() => (codeSnippet = true)}
-                  class="printInvoice focus:outline-none focus:shadow-outline-blue inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium leading-6 text-gray-700 shadow-sm transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 sm:text-sm sm:leading-5"
+                  class="printInvoice focus:shadow-outline-blue inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium leading-6 text-gray-700 shadow-sm transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
                   ><span class="la la-download mt-1" />Show All Info</button
                 >
               </div>

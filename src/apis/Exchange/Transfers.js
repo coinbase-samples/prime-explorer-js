@@ -16,4 +16,3 @@ export const getTransfers = async () => {
     return e;
   }
 };
-

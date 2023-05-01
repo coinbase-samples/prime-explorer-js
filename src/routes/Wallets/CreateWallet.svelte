@@ -59,7 +59,7 @@
   {#if walletBlock}
     <form
       on:submit={handleSubmit}
-      class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+      class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
     >
       <label for="type" class="mb-2 block text-sm font-bold text-gray-700"
         ><b>Create A Vault Wallet:</b></label
@@ -68,7 +68,7 @@
       <input
         id="name"
         name="name"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.name}
       />
@@ -76,7 +76,7 @@
       <input
         id="symbol"
         name="symbol"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.symbol}
       />
@@ -84,18 +84,18 @@
       <input
         id="wallet_type"
         name="wallet_type"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.wallet_type}
       />
 
       <Button
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         type="submit">Submit</Button
       >
       <Button
         on:click={() => (walletBlock = false)}
-        class="focus:outline-none focus:shadow-outline rounded bg-gray-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Close</Button
       >
       {#if walletAPIResponse}
@@ -107,7 +107,7 @@
   {:else}
     <Button
       on:click={() => (walletBlock = true)}
-      class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
       >Create Wallet</Button
     >
   {/if}

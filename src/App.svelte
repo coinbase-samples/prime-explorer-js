@@ -54,7 +54,6 @@
   import CreateAllocation from './routes/Orders/CreateAllocation.svelte';
   import AllocationId from './routes/Orders/AllocationId.svelte';
 
-
   const url = '';
 </script>
 
@@ -87,11 +86,7 @@
   <Route path="/Exchange/Orders/Fills" exact component={ExchangeFills} />
   <Route path="/Exchange/Orders/Open" exact component={ExchangeOpenOrders} />
   <Route path="/Exchange/Orders/:orderId" exact component={ExchangeOrderId} />
-  <Route
-    path="/Exchange/Orders/Create"
-    exact
-    component={PlaceExchangeOrder}
-  />
+  <Route path="/Exchange/Orders/Create" exact component={PlaceExchangeOrder} />
   <Route path="/Exchange/Withdrawals" exact component={Withdrawals} />
   <Route
     path="/Exchange/WithdrawToPaymentMethod"
@@ -105,7 +100,7 @@
   />
   <Route path="/Exchange/ConvertCurrency" exact component={ConvertCurrency} />
   <Route path="/Exchange/Currencies" exact component={Currencies} />
-    <Route path="/Exchange/Payments" exact component={PaymentMethods} />
+  <Route path="/Exchange/Payments" exact component={PaymentMethods} />
 
   <Route path="/Exchange/Transfers" exact component={Transfers} />
   <Route path="/Exchange/Currencies/:currencyId" component={CurrencyId} />

@@ -49,8 +49,7 @@
     { id: '2', text: 'SOL-USD' },
     { id: '3', text: 'MATIC-USD' },
     { id: '4', text: 'DOGE-USD' },
-    { id: '5', text: 'LINK-USD' }
-
+    { id: '5', text: 'LINK-USD' },
   ];
   const time_in_force_items = [
     { id: '0', text: 'GTC' },
@@ -62,7 +61,7 @@
     { id: '0', text: 'buy' },
     { id: '1', text: 'sell' },
   ];
-  let cancel_after = "hour";
+  let cancel_after = 'hour';
 
   const validateForm = () => {
     const isValid = orderSize !== '' && order_type !== '';
@@ -84,7 +83,6 @@
     formValid = isFormValid;
     if (isFormValid) {
       open = true;
-      
     } else {
       event.preventDefault();
       return false;
@@ -100,8 +98,7 @@
       time_in_force_text,
       limit_price,
       cancel_after,
-      display_base_size,
-     
+      display_base_size
     );
 
     const orderId = response.id;
@@ -137,13 +134,12 @@
           <p class="text-base text-gray-700">limit Price: {limit_price}</p>
         {/if}
       </div>
-      
     </div>
   </Modal>
   <Form
     style="max-width: 400px;"
     on:submit={handleSubmit}
-    class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+    class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
   >
     <h3>Place Order</h3>
     <br />
@@ -189,13 +185,13 @@
         placeholder="limit price"
         type="integer"
       /> <br />
-    <TextInput
+      <TextInput
         bind:value={display_base_size}
         labelText="Display Base Size"
         placeholder="display_base_size"
         type="display_base_size"
-    /> <br />
-    
+      /> <br />
+
       <TextInput
         bind:value={cancel_after}
         labelText="cancel_after"

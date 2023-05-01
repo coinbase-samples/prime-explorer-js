@@ -147,7 +147,7 @@
     <div class="mb-4">
       <form
         on:submit={handleSubmit}
-        class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+        class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
       >
         <label class="mb-2 block text-sm font-bold text-gray-700" for="type"
           ><b>Websocket Type: </b></label
@@ -171,7 +171,7 @@
         <select
           id="type"
           name="type"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.type}
         >
@@ -185,7 +185,7 @@
         <select
           id="channel"
           name="channel"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.channel}
         >
@@ -199,18 +199,18 @@
         <select
           id="product"
           name="product"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.product}
         >
-         {#each assetsMenuList as asset}
-          <option>{asset}</option>
+          {#each assetsMenuList as asset}
+            <option>{asset}</option>
           {/each}
         </select>
         <br /><br />
 
         <Button
-          class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+          class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           type="submit"
           >Submit
         </Button>
@@ -245,25 +245,25 @@
                     <tr>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Symbol
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Amount
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Holds
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Price
                       </th>
@@ -303,25 +303,25 @@
                     <tr>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Symbol
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Amount
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Holds
                       </th>
                       <th
                         scope="col"
-                        class="p-4 text-left text-xs font-medium font-bold uppercase tracking-wider text-white"
+                        class="p-4 text-left text-xs font-bold font-medium uppercase tracking-wider text-white"
                       >
                         Price
                       </th>

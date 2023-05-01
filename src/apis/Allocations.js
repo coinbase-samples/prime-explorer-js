@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { fetchStore } from '../stores/userSession-store';
 import { v4 as uuidv4 } from 'uuid';
-import { makeCall } from './PrimeClient';
+import { fetchStore } from '../stores/userSession-store';
 import { getStartDate } from '../utils/constants';
+import { makeCall } from './PrimeClient';
 
 let allocations;
 let result;

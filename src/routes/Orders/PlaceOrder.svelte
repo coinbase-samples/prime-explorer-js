@@ -54,7 +54,7 @@
     { id: '2', text: 'SOL-USD' },
     { id: '3', text: 'MATIC-USD' },
     { id: '4', text: 'DOGE-USD' },
-    { id: '5', text: 'LINK-USD' }
+    { id: '5', text: 'LINK-USD' },
   ];
   const time_in_force_items = [
     { id: '0', text: 'GOOD_UNTIL_DATE_TIME' },
@@ -161,7 +161,7 @@
   <Form
     style="max-width: 400px;"
     on:submit={handleSubmit}
-    class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+    class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
   >
     <h3>Place Order</h3>
     <br />
