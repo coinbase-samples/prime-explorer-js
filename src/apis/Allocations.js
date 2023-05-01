@@ -45,7 +45,6 @@ export const getAllocations = async (queryParams) => {
 
   try {
     const fetchAllocations = await makeCall('GET', allocationsUrl, path, '');
-
     const allocationsResponse = await fetchAllocations.json();
 
     allocations = allocationsResponse.allocations;
@@ -69,28 +68,38 @@ export const getAllocations = async (queryParams) => {
   }
 };
 
-export const createAllocation = async (product_ids, order_ids, size_type) => {
-  const allocation_id = uuidv4();
-  const allocation_leg_id = uuidv4();
+const createAllocationLegs = async (portfolios) => {
+  const allocationLegs = [];
+  const numPortfolios = portfolios.length;
 
-  const { portfolioId, destinationPortfolio, httpHost, port } =
-    await fetchStore();
-
-  const url = `${httpHost}:${port}/api/v1/allocations`;
-  const path = `/v1/allocations`;
-  const product_id = product_ids;
-
-  const allocation_legs = [
-    {
+  for (let i = 0; i < numPortfolios; i++) {
+    const allocation_leg_id = uuidv4();
+    const destination_portfolio_id = portfolios[i];
+    const amount = 100 / portfolios.length;
+    allocationLegs.push({
       allocation_leg_id,
-      destination_portfolio_id: destinationPortfolio,
-      amount: '100',
-    },
-  ];
+      destination_portfolio_id,
+      amount: JSON.stringify(amount),
+    });
+  }
+  return allocationLegs;
+};
+
+export const createAllocation = async (
+  product_ids,
+  order_ids,
+  size_type,
+  portfolios
+) => {
+  const { port, httpHost, portfolioId } = await fetchStore();
+  const allocation_id = uuidv4();
+
+  const allocation_legs = await createAllocationLegs(portfolios);
+
   const body = {
     allocation_id,
     source_portfolio_id: portfolioId,
-    product_id,
+    product_id: product_ids,
     order_ids,
     allocation_legs,
     size_type,
@@ -99,6 +108,8 @@ export const createAllocation = async (product_ids, order_ids, size_type) => {
   const payload = JSON.stringify(body);
 
   try {
+    const url = `${httpHost}:${port}/api/v1/allocations`;
+    const path = `/v1/allocations`;
     const initiateAllocation = await makeCall('POST', url, path, payload);
 
     const response = await initiateAllocation.json();

@@ -38,7 +38,6 @@
   onMount(async () => {
 
     orders = await getOpenOrders();
-    console.log('orders', orders)
     loaded = true;
 
   });

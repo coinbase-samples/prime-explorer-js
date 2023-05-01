@@ -1,6 +1,7 @@
 <script>
   import { navigate } from 'svelte-routing';
   import Nav from '../../Nav.svelte';
+  import { getAllPortfolios } from '../../apis/Portfolio';
   import { getOrders } from '../../apis/Orders';
   import { createAllocation } from '../../apis/Allocations';
   import { generateQueryparams } from '../../utils/queryParams';
@@ -15,14 +16,28 @@
   let orders = [];
   let orderList;
   let payload = [];
-  let selectedIds = [];
   let showOrdersSelect = false;
   let showOrdersSideSelect = false;
-
+  let showPortfoliosSelect = false;
+  let portfolios = [];
+  let portfoliosList = [];
   let selectedAsset;
   let selectedSide;
+  let selectedIds = [];
+  let selectedOrderIds = []; 
+  let selectedPortfolioIds;
 
+  
 
+  const getPortfolioList = async () => {
+    portfolios = await getAllPortfolios();
+    portfoliosList = portfolios.map((item, index) => {
+      return {
+        id: index,
+        text: item.id, // Include both id and description
+      };
+    });
+  };
 
  const generateOrdersList = async (queryParams) => {
    const params = generateQueryparams(queryParams);
@@ -44,29 +59,43 @@
      navigate('/Orders/Allocations');
   }
 
-  const handleAssetSelect = async () => {
   
+
+
+
+  const handleAssetSelect = async () => {
   const queryParams=  {
     start_date: startDate,
     product_ids: selectedAsset,
     order_side: selectedSide,
-
-};
-    await generateOrdersList(queryParams);
-    showOrdersSelect = true;
-    showOrdersSideSelect = true;
   };
+  await generateOrdersList(queryParams);
+  await getPortfolioList();
+ 
+  showOrdersSelect = true;
+  showOrdersSideSelect = true;
+  showPortfoliosSelect = true;
+};
+
 
   const executeAllocation = async () => {
-    // Loop through selectedIds array and retrieve text value for each selected item
-    const selectedItems = selectedIds.map(id => {
-      return payload.find(item => item.id === id).text;
-    });
+ 
+  if (!selectedPortfolioIds || selectedPortfolioIds.length === 0) {
+    console.error('No portfolios selected');
+    return;
+  }
+  
+  const selectedOrderItems = selectedOrderIds.map(id => {
+    return payload.find(item => item.id === id).text;
+  });
 
-    const result = await createAllocation(selectedAsset, selectedItems, "PERCENT");
-    alertPrompt(result)
+  const selectedPortIds = selectedPortfolioIds.map(id => {
+    return portfoliosList.find(item => item.id === id).text;
+  });
+  const result = await createAllocation(selectedAsset, selectedOrderItems, "PERCENT", selectedPortIds);
+  alertPrompt(result);
+};
 
-  };
 </script>
 
 <Nav />
@@ -81,7 +110,7 @@
   class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
   bind:value={selectedSide}
 >
-  <option value="ss">Choose Order Side</option>
+  <option value="">Choose Order Side</option>
   <option value="BUY">BUY</option>
   <option value="SELL">SELL</option>
 </select>
@@ -102,19 +131,34 @@
   <option value="ETH-USD">ETH-USD</option>
   <option value="SOL-USD">SOL-USD</option>
   <option value="MATIC-USD">MATIC-USD</option>
-
+  <option value="DOGE-USD">DOGE-USD</option>
 </select>
-  {#if showOrdersSelect && showOrdersSideSelect}
-  <MultiSelect
-    size="xl"
-    label="Select Orders to Allocate"
-    items={payload}
-    bind:selectedIds
-    onchange={e => (selectedIds = e.detail.value)}
-  />
 
- 
-    <br />
-    <Button on:click={executeAllocation}>Allocate</Button>
- {/if}
+  <MultiSelect
+  size="xl"
+  label="Select Portfolios to Allocate to"
+  items={portfoliosList}
+  bind:selectedIds={selectedPortfolioIds}
+  on:change={e => {
+    selectedPortfolioIds = e.detail.value;
+  }}
+/>
+
+
+  <br />
+  {#if showOrdersSelect && showOrdersSideSelect} 
+  <MultiSelect
+  size="xl"
+  label="Select Orders to Allocate"
+  items={payload}
+  bind:selectedIds={selectedOrderIds}
+  on:change={e => {
+    selectedOrderIds = e.detail.value;
+  }}
+/>
+   {/if}
+  <br />
+
+  <Button on:click={executeAllocation}>Allocate</Button>
+
 </Content>

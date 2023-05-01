@@ -117,6 +117,7 @@
             <option>ETH-USD</option>
             <option>SOL-USD</option>
             <option>MATIC-USD</option>
+            <option>DOGE-USD</option>
           </select>
           <label
             class="mb-2 block text-sm font-bold text-gray-700"

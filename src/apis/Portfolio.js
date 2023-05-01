@@ -31,3 +31,19 @@ export const getPortfolios = async () => {
     return e;
   }
 };
+
+export const getAllPortfolios = async () => {
+  const { port, httpHost } = await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/portfolios`;
+
+  const path = `/v1/portfolios`;
+  try {
+    const fetchPortfolios = await makeCall('GET', url, path, '');
+
+    const portFoliosList = await fetchPortfolios.json();
+    return portFoliosList.portfolios;
+  } catch (e) {
+    return e;
+  }
+};
