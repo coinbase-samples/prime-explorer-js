@@ -90,6 +90,8 @@
 
 <Nav />
 <Content class="Layout">
+  <h3>Create Allocation</h3>
+  <br />
   <label class="mb-2 block text-sm font-bold text-gray-700" for="choose-asset"
     ><b>Side:</b></label
   >
