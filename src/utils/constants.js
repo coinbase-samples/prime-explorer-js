@@ -47,12 +47,4 @@ export const assetsMenuList = [
   'MKR-USD',
   'SNX-USD',
   'COMP-USD',
-  'CRV-USD',
-  'BAL-USD',
-  'REN-USD',
-  'UMA-USD',
-  'ENJ-USD',
-  'GRT-USD',
-  'KNC-USD',
-  'OMG-USD',
 ];
