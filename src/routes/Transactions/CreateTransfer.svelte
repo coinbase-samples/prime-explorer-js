@@ -49,7 +49,7 @@
     initiateTransferResponse = JSON.stringify(initiateTransferPost);
     if (activityId) {
       transferAPIResponse = true;
-      alert('Transfer initiated, your Activity Id is: ' + activityId);
+      alert(`Transfer initiated, your Activity Id is: ${activityId}`);
       navigate(`/Activities/${activityId}`);
     }
   };
@@ -76,16 +76,16 @@
   {#if transferBlock}
     <form
       on:submit={handleSubmit}
-      class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+      class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
     >
-      <label htmlFor="type" class="mb-2 block text-sm font-bold text-gray-700"
+      <label for="type" class="mb-2 block text-sm font-bold text-gray-700"
         ><b>Create An Internal Transfer:</b></label
       ><br />
       <label for="wallet_id">From Wallet Id:</label><br />
       <input
         id="wallet_id"
         name="wallet_id"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.wallet_id}
       />
@@ -93,7 +93,7 @@
       <input
         id="amount"
         name="amount"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.amount}
       />
@@ -101,7 +101,7 @@
       <input
         id="destination"
         name="destination"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.destination}
       />
@@ -109,18 +109,18 @@
       <input
         id="currency_symbol"
         name="currency_symbol"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.currency_symbol}
       />
 
       <Button
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         type="submit">Submit</Button
       >
       <Button
         on:click={() => (transferBlock = false)}
-        class="focus:outline-none focus:shadow-outline rounded bg-gray-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-gray-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Close</Button
       >
       {#if transferAPIResponse}
@@ -132,7 +132,7 @@
   {:else}
     <Button
       on:click={() => (transferBlock = true)}
-      class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
       >Create Transfer</Button
     >
   {/if}

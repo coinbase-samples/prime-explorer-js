@@ -16,19 +16,16 @@
    */
 
   import { navigate } from 'svelte-routing';
-  import Nav from '../../Nav.svelte';
+  import Nav from '../../../Nav.svelte';
   import {
     Dropdown,
     Content,
-    Checkbox,
     Form,
     TextInput,
     Button,
-    CodeSnippet,
     Modal,
   } from 'carbon-components-svelte';
-  import { createOrder, createOrderPreview } from '../../apis/Orders';
-  import { getEndDate, getStartDate } from '../../utils/constants';
+  import { createExchangeOrder } from '../../../apis/Exchange/Orders';
 
   let open = false;
   let limit_price;
@@ -36,16 +33,13 @@
   let order_type = '0';
   let time_in_force_type = '0';
   const order_type_items = [
-    { id: '0', text: 'MARKET' },
-    { id: '1', text: 'LIMIT' },
-    { id: '2', text: 'TWAP' },
+    { id: '0', text: 'market' },
+    { id: '1', text: 'limit' },
+    { id: '2', text: 'stop' },
   ];
   let side = '0';
 
   let product_id = '0';
-  let ordersPreview;
-  let previewPayload;
-  let iceberg = false;
   let display_base_size;
 
   let formValid = true;
@@ -58,17 +52,16 @@
     { id: '5', text: 'LINK-USD' },
   ];
   const time_in_force_items = [
-    { id: '0', text: 'GOOD_UNTIL_DATE_TIME' },
-    { id: '1', text: 'GOOD_UNTIL_CANCELLED' },
-    { id: '2', text: 'IMMEDIATE_OR_CANCEL' },
+    { id: '0', text: 'GTC' },
+    { id: '1', text: 'GTT' },
+    { id: '2', text: 'FOK' },
   ];
 
   const side_items = [
-    { id: '0', text: 'BUY' },
-    { id: '1', text: 'SELL' },
+    { id: '0', text: 'buy' },
+    { id: '1', text: 'sell' },
   ];
-  let start_time = getStartDate(1);
-  let expiry_time = getEndDate(3);
+  let cancel_after = 'hour';
 
   const validateForm = () => {
     const isValid = orderSize !== '' && order_type !== '';
@@ -77,31 +70,19 @@
 
   $: product_id_text =
     product_id >= 0 ? product_id_items[product_id].text : 'BTC-USD';
-  $: side_text = side >= 0 ? side_items[side].text : 'Buy';
+  $: side_text = side >= 0 ? side_items[side].text : 'buy';
   $: order_type_text =
-    order_type >= 0 ? order_type_items[order_type].text : 'MARKET';
+    order_type >= 0 ? order_type_items[order_type].text : 'market';
   $: time_in_force_text =
     time_in_force_type >= 0
       ? time_in_force_items[time_in_force_type].text
-      : 'GOOD_UNTIL_DATE_TIME';
+      : 'FOK';
 
   const handleSubmit = async (event) => {
     const isFormValid = validateForm();
     formValid = isFormValid;
     if (isFormValid) {
       open = true;
-      ordersPreview = await createOrderPreview(
-        product_id_text,
-        side_text,
-        order_type_text,
-        orderSize,
-        limit_price,
-        time_in_force_text,
-        start_time,
-        expiry_time,
-        display_base_size
-      );
-      previewPayload = JSON.stringify(ordersPreview);
     } else {
       event.preventDefault();
       return false;
@@ -109,23 +90,22 @@
   };
 
   const finalRequest = async () => {
-    const response = await createOrder(
+    const response = await createExchangeOrder(
       product_id_text,
       side_text,
       order_type_text,
       orderSize,
-      limit_price,
       time_in_force_text,
-      start_time,
-      expiry_time,
+      limit_price,
+      cancel_after,
       display_base_size
     );
 
-    const orderId = response.order_id;
+    const orderId = response.id;
     if (response) {
       open = false;
       alert(`Order initiated, your Order id is: ${orderId}`);
-      navigate(`/Orders/${orderId}`);
+      navigate(`/Exchange/Orders/${orderId}`);
     }
   };
 </script>
@@ -150,13 +130,10 @@
         <p class="text-blue-600-700 text-base">SIDE: {side_text}</p>
         <p class="text-blue-600-700 text-base">Product Id: {product_id_text}</p>
         <p class="text-blue-600-700 text-base">Order Type: {order_type_text}</p>
-        {#if order_type_text === 'LIMIT'}
-          <p class="text-base text-gray-700">Limit Price: {limit_price}</p>
+        {#if order_type_text === 'limit'}
+          <p class="text-base text-gray-700">limit Price: {limit_price}</p>
         {/if}
       </div>
-      <CodeSnippet type="multi" wrapText="true" expanded="true"
-        >{previewPayload}</CodeSnippet
-      >
     </div>
   </Modal>
   <Form
@@ -194,61 +171,32 @@
       required
       items={order_type_items}
     /><br />
-    {#if order_type_text === 'LIMIT'}
+    <Dropdown
+      bind:selectedIndex={time_in_force_type}
+      titleText="Time in force type"
+      placeholder="Time in force type placeholder"
+      required
+      items={time_in_force_items}
+    /><br />
+    {#if order_type_text === 'limit'}
       <TextInput
         bind:value={limit_price}
         labelText="limit Price"
         placeholder="limit price"
-        type="number"
+        type="integer"
       /> <br />
-      <Checkbox
-        labelText="Do you want to Iceberg Trade?"
-        placeholder="IcebBerg"
-        type="checkbox"
-        bind:checked={iceberg}
+      <TextInput
+        bind:value={display_base_size}
+        labelText="Display Base Size"
+        placeholder="display_base_size"
+        type="display_base_size"
       /> <br />
 
-      <Dropdown
-        bind:selectedIndex={time_in_force_type}
-        titleText="time_in_force Type"
-        placeholder="time_in_force Typer"
-        required
-        items={time_in_force_items}
-      /><br />
-      {#if iceberg}
-        <TextInput
-          bind:value={display_base_size}
-          labelText="Display Base Size"
-          placeholder="display_base_size"
-          type="display_base_size"
-        /> <br />
-      {/if}
-      {#if time_in_force_type === '0'}
-        <TextInput
-          bind:value={expiry_time}
-          labelText="expiry_time"
-          placeholder="expiry_time"
-          type="expiry_time"
-        /> <br />
-      {/if}
-    {:else if order_type_text === 'TWAP'}
       <TextInput
-        bind:value={limit_price}
-        labelText="limit Price"
-        placeholder="limit price"
-        type="number"
-      /> <br />
-      <TextInput
-        bind:value={start_time}
-        labelText="start_time"
-        placeholder="start_time"
-        type="start_time"
-      /> <br />
-      <TextInput
-        bind:value={expiry_time}
-        labelText="expiry_time"
-        placeholder="expiry_time"
-        type="expiry_time"
+        bind:value={cancel_after}
+        labelText="cancel_after"
+        placeholder="cancel_after"
+        type="cancel_after"
       /> <br />
     {/if}
     <Button type="submit" style="background: #2c2c2c">Submit</Button>

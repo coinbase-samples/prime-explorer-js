@@ -17,7 +17,7 @@
 
   import { onMount } from 'svelte';
   import { getOrders } from '../../apis/Orders';
-
+  import { assetsMenuList } from '../../utils/constants';
   import Nav from '../../Nav.svelte';
   import {
     Button,
@@ -26,20 +26,20 @@
     OutboundLink,
     Pagination,
   } from 'carbon-components-svelte';
-  import queryString from 'querystring';
   import { createForm } from 'svelte-forms-lib';
-  import _ from 'lodash-es';
+  import { generateQueryparams } from '../../utils/queryParams';
+  import { getStartDate } from '../../utils/constants';
 
   let orders;
   let ordersFilter;
   let ordersForm = false;
   let ordersFilterView = false;
-  let stringifiedQueryParams;
   let totalOrderItems;
   let paginatedOrders;
   let next_cursor;
   let has_next = false;
   let loaded;
+  const start_date = getStartDate(3);
 
   onMount(async () => {
     orders = await getOrders();
@@ -47,28 +47,19 @@
     next_cursor = orders.pagination.next_cursor;
     has_next = orders.pagination.has_next;
     orders = orders.orders;
-    totalOrderItems = _.size(orders);
-    const pluckedItems = _.take(orders, 10);
+    totalOrderItems = Object.keys(orders).length;
+    const pluckedItems = orders.slice(0, 10);
+
     orders = pluckedItems;
   });
 
   const nextPaginationSet = async () => {
     if (has_next)
       paginatedOrders = await getOrders(
-        `start_date=2022-06-25T00:59:59Z&cursor=${next_cursor}`
+        `start_date=${start_date}=${next_cursor}`
       );
     ordersFilter = paginatedOrders.orders;
     ordersFilterView = true;
-  };
-
-  const updateOrders = async () => {
-    try {
-      const filteredOrders = await getOrders(stringifiedQueryParams);
-      ordersFilter = filteredOrders.orders;
-      ordersFilterView = true;
-    } catch (e) {
-      alert(e);
-    }
   };
 
   const submitForm = async (
@@ -92,20 +83,17 @@
       end_date,
     };
 
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
+    const stringifiedQueryParams = generateQueryparams(queryParams);
 
-    stringifiedQueryParams = queryString.stringify(filteredQueryParams);
-    closeForm();
-    await updateOrders();
+    ordersFilter = await getOrders(stringifiedQueryParams);
+    ordersFilterView = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
       product_ids: 'BTC-USD',
-      start_date: '2021-12-05T14:48:00Z',
+      start_date,
+      order_side: 'BUY',
     },
     onSubmit: (values) => {
       const order_statuses = values.order_statuses;
@@ -141,7 +129,7 @@
     <div class="mb-4">
       <form
         on:submit={handleSubmit}
-        class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+        class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
       >
         <label
           class="mb-2 block text-sm font-bold text-gray-700"
@@ -150,7 +138,7 @@
         <select
           id="order_statuses"
           name="order_statuses"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.order_statuses}
         >
@@ -168,13 +156,13 @@
         <select
           id="product_ids"
           name="product_ids"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.product_ids}
         >
-          <option />
-          <option>BTC-USD</option>
-          <option>ETH-USD</option>
+          {#each assetsMenuList as asset}
+            <option>{asset}</option>
+          {/each}
         </select>
         <label
           class="mb-2 block text-sm font-bold text-gray-700"
@@ -183,7 +171,7 @@
         <select
           id="order_type"
           name="order_type"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.order_type}
         >
@@ -198,7 +186,7 @@
         <input
           id="cursor"
           name="cursor"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.cursor}
         /><br /><br />
@@ -208,7 +196,7 @@
         <input
           id="limit"
           name="limit"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.limit}
         /><br /><br />
@@ -220,7 +208,7 @@
         <input
           id="sort_direction"
           name="sort_direction"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.sort_direction}
         /><br /><br />
@@ -232,7 +220,7 @@
         <input
           id="order_side"
           name="order_side"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.order_side}
         /><br /><br />
@@ -245,7 +233,7 @@
           name="start_date"
           on:change={handleChange}
           bind:value={$form.start_date}
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         /><br /><br />
         <label class="mb-2 block text-sm font-bold text-gray-700" for="end_date"
           >End Date:
@@ -253,18 +241,18 @@
         <input
           id="end_date"
           name="end_date"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.end_date}
         />
         <br /><br />
         <Button
-          class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+          class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           type="submit">Submit</Button
         >
         <Button
           on:click={closeForm}
-          class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+          class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           >Close</Button
         >
       </form>
@@ -273,7 +261,7 @@
   {:else}
     <br /><Button
       on:click={() => (ordersForm = true)}
-      class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
       >Filter Orders</Button
     >
   {/if}
@@ -290,7 +278,7 @@
         { key: 'created_at', value: 'Created At' },
         { key: 'base_quantity', value: 'Base Quantity' },
       ]}
-      rows={ordersFilter}
+      rows={ordersFilter.orders}
     >
       <strong slot="title">Filtered Orders List</strong>
       <span slot="description" style="font-size: 1rem">

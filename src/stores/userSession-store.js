@@ -45,6 +45,7 @@ export const fetchStore = async () => {
   let httpHost;
   let originWallet;
   let destinationWallet;
+  let destinationPortfolio;
 
   await userEnvironment.subscribe(() => {
     signingKey = vars.env.PROD_SIGNING_KEY;
@@ -59,6 +60,7 @@ export const fetchStore = async () => {
     entityId = vars.env.ENTITY_ID;
     destinationWallet = vars.env.DESTINATION_WALLET;
     originWallet = vars.env.ORIGIN_WALLET;
+    destinationPortfolio = vars.env.PROD_DESTINATION_PORTFOLIO_ID;
   });
 
   const response = {
@@ -74,6 +76,7 @@ export const fetchStore = async () => {
     httpHost,
     destinationWallet,
     originWallet,
+    destinationPortfolio,
   };
   return response;
 };

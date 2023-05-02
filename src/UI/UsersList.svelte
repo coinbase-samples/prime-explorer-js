@@ -23,6 +23,7 @@
     userList = await getPortfolioUsers();
   });
 </script>
+
 <DataTable
   size="short"
   headers={[

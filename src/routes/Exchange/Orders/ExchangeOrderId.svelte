@@ -16,19 +16,27 @@
    */
 
   import 'carbon-components-svelte/css/white.css';
+  import { getOrderById } from '../../../apis/Exchange/Orders';
   import { Tile, CodeSnippet, Content } from 'carbon-components-svelte';
-  import Nav from '../../Nav.svelte';
+  import Nav from '../../../Nav.svelte';
 
   import { onMount } from 'svelte';
-  import { getCurrencyId } from '../../apis/Exchange/Currencies';
 
-  let currencyIdDetails = {};
+  let date, user_id, product_id, side, type, status, payload, orderIdDetails;
   let codeSnippet = false;
 
-  export let currencyId;
+  export let orderId;
 
   onMount(async () => {
-    currencyIdDetails = await getCurrencyId(currencyId);
+    orderIdDetails = await getOrderById(orderId);
+    payload = JSON.stringify(orderIdDetails);
+
+    status = orderIdDetails.status;
+    date = orderIdDetails.created_at;
+    user_id = orderIdDetails.profile_id;
+    side = orderIdDetails.side;
+    type = orderIdDetails.type;
+    product_id = orderIdDetails.product_id;
   });
 </script>
 
@@ -44,11 +52,11 @@
           <div class="flex flex-row justify-between ">
             <div class="mx-auto flex w-full flex-col">
               <div class="flex flex-row">
-                <h1 class="text-2xl"><strong>Currency Details: </strong></h1>
+                <h1 class="text-2xl"><strong>Order Details: </strong></h1>
               </div>
               <div class="mt-3 flex flex-row justify-between">
                 <div>
-                  <h5><small>Id: {currencyIdDetails.id}</small></h5>
+                  <h5><small>Transaction Date: {date}</small></h5>
                   <br />
                 </div>
               </div>
@@ -57,7 +65,7 @@
               <span
                 class="text-thumeza-500 flex transform items-center justify-center space-x-3 transition-all duration-1000 ease-out"
               >
-                <img class="h-28 w-28" src="/coinLogo.png" alt="cb logo" />
+                <img class="h-28 w-28" alt="logo" src="/coinLogo.png" />
               </span>
             </div>
           </div>
@@ -67,13 +75,11 @@
           <div class="mt-3 flex justify-between">
             <div class="flex flex-col ">
               <p class="">
-                Name: {currencyIdDetails.name}<br />
-                Id: {currencyIdDetails.id}<br />
-                Min_size: {currencyIdDetails.min_size}<br />
-                Status: {currencyIdDetails.status}<br />
-                Message: {currencyIdDetails.message}<br />
-                Max Precision: {currencyIdDetails.max_precision}<br />
-                Convertible To: {currencyIdDetails.convertible_to}
+                User Id: {user_id}<br />
+                Side: {side}<br />
+                Status: {status}<br />
+                Type: {type}<br />
+                Product Id: {product_id}
               </p>
             </div>
           </div>
@@ -81,7 +87,7 @@
             <div class="">
               <div class="">
                 <button
-                  on:click={() => (codeSnippet = !codeSnippet)}
+                  on:click={() => (codeSnippet = true)}
                   class="printInvoice focus:shadow-outline-blue inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium leading-6 text-gray-700 shadow-sm transition duration-150 ease-in-out hover:text-gray-500 focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
                   ><span class="la la-download mt-1" />Show All Info</button
                 >
@@ -91,10 +97,10 @@
 
           {#if codeSnippet}
             <Tile style={{ width: '100px' }}>
-              <h3>Raw Currency Details:</h3>
+              <h3>Raw Order Details:</h3>
             </Tile>
             <CodeSnippet type="multi" wrapText="true" expanded="true">
-              {JSON.stringify(currencyIdDetails)}
+              {payload}
             </CodeSnippet>
           {/if}
         </div>

@@ -15,12 +15,11 @@
    * limitations under the License.
    */
 
-  import { Content, Button } from 'carbon-components-svelte';
+  import { Content, Button, DataTable } from 'carbon-components-svelte';
   import { createForm } from 'svelte-forms-lib';
 
   import { onMount } from 'svelte';
   import Nav from '../Nav.svelte';
-  import { DataTable } from 'carbon-components-svelte';
   import { getProducts } from '../apis/Products';
   import queryString from 'querystring';
   import _ from 'lodash-es';
@@ -72,7 +71,7 @@
     <div class="mb-4">
       <form
         on:submit={handleSubmit}
-        class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+        class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
       >
         <label
           class="mb-2 block text-sm font-bold text-gray-700"
@@ -81,7 +80,7 @@
         <select
           id="sort_direction"
           name="sort_direction"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.sort_direction}
         >
@@ -95,7 +94,7 @@
         <input
           id="cursor"
           name="cursor"
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           on:change={handleChange}
           bind:value={$form.cursor}
         />
@@ -107,16 +106,16 @@
           name="limit"
           on:change={handleChange}
           bind:value={$form.limit}
-          class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+          class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         />
         <br /><br />
         <Button
-          class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+          class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           type="submit">Submit</Button
         >
         <Button
           on:click={() => (ProductsForm = false)}
-          class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+          class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
           >Close</Button
         >
       </form>
@@ -125,7 +124,7 @@
   {:else}
     <Button
       on:click={() => (ProductsForm = true)}
-      class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
       >Filter Transactions</Button
     >
   {/if}

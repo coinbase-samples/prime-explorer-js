@@ -68,16 +68,16 @@
   {#if addressBlock}
     <form
       on:submit={handleSubmit}
-      class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+      class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
     >
-      <label htmlFor="type" class="mb-2 block text-sm font-bold text-gray-700"
+      <label for="type" class="mb-2 block text-sm font-bold text-gray-700"
         ><b>Create A Vault address:</b></label
       ><br />
       <label for="address">Address:</label><br />
       <input
         id="address"
         name="address"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.address}
       />
@@ -85,7 +85,7 @@
       <input
         id="name"
         name="name"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.name}
       />
@@ -93,7 +93,7 @@
       <input
         id="currency_symbol"
         name="currency_symbol"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.currency_symbol}
       />
@@ -101,13 +101,13 @@
       <input
         id="account_identifier"
         name="account_identifier"
-        class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+        class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
         on:change={handleChange}
         bind:value={$form.account_identifier}
       />
 
       <Button
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         type="submit">Submit</Button
       >
       {#if addressAPIResponse}

@@ -17,22 +17,21 @@
 
   import 'carbon-components-svelte/css/white.css';
   import { Tile, CodeSnippet, Content } from 'carbon-components-svelte';
-  import Nav from '../Nav.svelte';
+  import Nav from '../../Nav.svelte';
   import { onMount } from 'svelte';
-  import { getTransactionId } from '../apis/Transactions';
+  import { getAllocationId } from '../../apis/Allocations';
 
-  let transactionIdDetails;
+  let allocationIdDetails;
   let result;
   let amount;
   let id;
   let payload;
 
-  export let transactionId;
+  export let allocationId;
 
   onMount(async () => {
-    transactionIdDetails = await getTransactionId(transactionId);
-
-    result = transactionIdDetails;
+    allocationIdDetails = await getAllocationId(allocationId);
+    result = allocationIdDetails;
 
     amount = result.amount;
     id = result.id;
@@ -43,7 +42,7 @@
 <Nav />
 <Content class="Layout">
   <Tile style={{ width: '100px' }}>
-    <h3>Transaction Details:</h3>
+    <h3>Allocation Details:</h3>
   </Tile>
 
   <CodeSnippet type="multi" wrapText="true" expanded="true">

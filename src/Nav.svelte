@@ -72,6 +72,11 @@
         text="Orders Allocated"
         on:click={(event) => routeTo(event, '/Orders/Allocations')}
       />
+      <SideNavMenuItem
+        href="/Orders/CreateAllocation"
+        text="Create Allocation"
+        on:click={(event) => routeTo(event, '/Orders/Allocate')}
+      />
     </SideNavMenu>
     <SideNavDivider />
     <SideNavMenu text="Transactions">
@@ -131,60 +136,84 @@
     <SideNavDivider />
     <SideNavMenu text="Exchange">
       <SideNavMenuItem
-        text="Exchange"
+        text="Add Crypto Address"
         href="/Exchange"
         on:click={(event) => routeTo(event, '/Exchange')}
       />
-      <SideNavMenuItem
-        href="/Exchange/Withdrawals"
-        text="Withdrawals"
-        on:click={(event) => routeTo(event, '/Exchange/Withdrawals')}
-      />
-      <SideNavMenuItem
-        href="/Exchange/WithdrawToPaymentMethod"
-        text="WithdrawToPaymentMethod"
-        on:click={(event) =>
-          routeTo(event, '/Exchange/WithdrawToPaymentMethod')}
-      />
-       <SideNavMenuItem
-        href="/Exchange/DepositToPaymentMethod"
-        text="DepositToPaymentMethod"
-        on:click={(event) =>
-          routeTo(event, '/Exchange/DepositToPaymentMethod')}
-      />
-      <SideNavMenuItem
-        href="/Exchange/ConvertCurrency"
-        text="ConvertCurrency"
-        on:click={(event) => routeTo(event, '/Exchange/ConvertCurrency')}
-      />
-      <SideNavMenuItem
-        href="/Exchange/Currencies"
-        text="Currencies"
-        on:click={(event) => routeTo(event, '/Exchange/Currencies')}
-      />
+      <SideNavDivider />
+      <SideNavMenu text="Orders">
+        <SideNavMenuItem
+          text="Order Fills"
+          href="/Exchange/Orders/Fills"
+          on:click={(event) => routeTo(event, '/Exchange/Orders/Fills')}
+        />
+        <SideNavMenuItem
+          text="Open Orders"
+          href="/Exchange/Orders/Open"
+          on:click={(event) => routeTo(event, '/Exchange/Orders/Open')}
+        />
+        <SideNavMenuItem
+          text="Place Order"
+          href="/Exchange/Orders/Create"
+          on:click={(event) => routeTo(event, '/Exchange/Orders/Create')}
+        />
+      </SideNavMenu>
+      <SideNavMenu text="Transfers">
+        <SideNavMenuItem
+          href="/Exchange/Transfers"
+          text="Transfers List"
+          on:click={(event) => routeTo(event, '/Exchange/Transfers')}
+        />
+        <SideNavMenuItem
+          href="/Exchange/Withdrawals"
+          text="Withdrawals"
+          on:click={(event) => routeTo(event, '/Exchange/Withdrawals')}
+        />
+        <SideNavDivider />
+        <SideNavMenuItem
+          href="/Exchange/WithdrawToPaymentMethod"
+          text="WithdrawToPaymentMethod"
+          on:click={(event) =>
+            routeTo(event, '/Exchange/WithdrawToPaymentMethod')}
+        />
+        <SideNavMenuItem
+          href="/Exchange/DepositToPaymentMethod"
+          text="DepositToPaymentMethod"
+          on:click={(event) =>
+            routeTo(event, '/Exchange/DepositToPaymentMethod')}
+        />
+      </SideNavMenu>
+      <SideNavDivider />
+      <SideNavMenu text="Currencies">
+        <SideNavMenuItem
+          href="/Exchange/Currencies"
+          text="Currencies"
+          on:click={(event) => routeTo(event, '/Exchange/Currencies')}
+        />
+        <SideNavMenuItem
+          href="/Exchange/ConvertCurrency"
+          text="ConvertCurrency"
+          on:click={(event) => routeTo(event, '/Exchange/ConvertCurrency')}
+        />
+      </SideNavMenu>
       <SideNavMenuItem
         href="/Exchange/Payments"
         text="Payments"
         on:click={(event) => routeTo(event, '/Exchange/Payments')}
       />
-      <SideNavMenuItem
-      href="/Exchange/Transfers"
-      text="Transfers"
-      on:click={(event) => routeTo(event, '/Exchange/Transfers')}
-    />
+      <SideNavDivider />
+      <SideNavLink
+        text="Products"
+        href="/Products"
+        on:click={(event) => routeTo(event, '/Products')}
+      />
+      <SideNavDivider />
+      <SideNavLink
+        text="Users"
+        href="/Users"
+        on:click={(event) => routeTo(event, '/Users')}
+      />
     </SideNavMenu>
-    <SideNavDivider />
-    <SideNavLink
-      text="Products"
-      href="/Products"
-      on:click={(event) => routeTo(event, '/Products')}
-    />
-    <SideNavDivider />
-    <SideNavLink
-      text="Users"
-      href="/Users"
-      on:click={(event) => routeTo(event, '/Users')}
-    />
     <SideNavDivider />
   </SideNavItems>
 </SideNav>

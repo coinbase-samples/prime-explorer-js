@@ -19,14 +19,21 @@
   import { onMount } from 'svelte';
 
   export let walletId;
-  let result;
   let walletBalanceDetails;
-  let balance;
   onMount(async () => {
     walletBalanceDetails = await getWalletBalance(walletId);
-    result = walletBalanceDetails;
-    balance = result.balance.amount;
   });
 </script>
 
-<h5>{balance}</h5>
+{#if walletBalanceDetails && walletBalanceDetails.balance}
+  <h4>Balance Amount: {walletBalanceDetails.balance.amount}</h4>
+  <h4>Bonded Amount: {walletBalanceDetails.balance.bonded_amount}</h4>
+  <h4>Reserved Amount: {walletBalanceDetails.balance.reserved_amount}</h4>
+  <h4>Unbonded Amount: {walletBalanceDetails.balance.unbonding_amount}</h4>
+  <h4>Unvested Amount: {walletBalanceDetails.balance.unvested_amount}</h4>
+  <h4>Rewards Amount: {walletBalanceDetails.balance.pending_rewards_amount}</h4>
+  <h4>
+    Past Rewards Amount: {walletBalanceDetails.balance.past_rewards_amount}
+  </h4>
+  <br />
+{/if}

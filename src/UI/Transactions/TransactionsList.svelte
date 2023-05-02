@@ -16,12 +16,17 @@
    */
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getTransactions } from '../../apis/Transactions';
-  import { Content, Button, OutboundLink } from 'carbon-components-svelte';
+  import { getStartDate, getEndDate } from '../../utils/constants';
+  import {
+    Content,
+    Button,
+    OutboundLink,
+    DataTable,
+    Link,
+  } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
-  import { DataTable, Link } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
+  import { generateQueryparams } from '../../utils/queryParams';
 
   let transactions;
   let TransactionsFilter;
@@ -44,19 +49,16 @@
       end_time: endTime,
       limit,
     };
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
+
     TransactionsFilter = await getTransactions(stringifiedQueryParams);
     transactionsFilterView = true;
   };
 
   const { form, handleChange, handleSubmit } = createForm({
     initialValues: {
-      start_time: '2022-06-05T14:48:00.000Z',
-      end_time: '2022-10-06T14:48:00.000Z',
+      start_time: getStartDate(30),
+      end_time: getEndDate(5),
       limit: '2',
       order: 'ASC',
     },
@@ -77,7 +79,7 @@
       <div class="mb-4">
         <form
           on:submit={handleSubmit}
-          class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+          class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
         >
           <label class="mb-2 block text-sm font-bold text-gray-700" for="type"
             ><b>Types: </b></label
@@ -85,7 +87,7 @@
           <select
             id="type"
             name="type"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.type}
           >
@@ -109,7 +111,7 @@
           <input
             id="order"
             name="order"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.order}
           />
@@ -123,7 +125,7 @@
             name="start_time"
             on:change={handleChange}
             bind:value={$form.start_time}
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           />
           <label
             class="mb-2 block text-sm font-bold text-gray-700"
@@ -133,7 +135,7 @@
           <input
             id="end_time"
             name="end_time"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.end_time}
           />
@@ -144,7 +146,7 @@
           <input
             id="limit"
             name="limit"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.limit}
           />
@@ -152,12 +154,12 @@
 
           <br /><br />
           <Button
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             type="submit">Submit</Button
           >
           <Button
             on:click={() => (transactionsForm = false)}
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             >Close</Button
           >
         </form>
@@ -166,7 +168,7 @@
     {:else}
       <Button
         on:click={() => (transactionsForm = true)}
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Filter Transactions</Button
       >
     {/if}

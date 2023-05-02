@@ -17,16 +17,32 @@ import { fetchStore } from '../stores/userSession-store';
 import { makeCall } from './PrimeClient';
 
 export const getPortfolios = async () => {
-  const { port, httpHost } = await fetchStore();
+  const { port, httpHost, portfolioId } = await fetchStore();
 
-  const url = `${httpHost}:${port}/api/v1/portfolios`;
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}`;
 
-  const path = '/v1/portfolios';
+  const path = `/v1/portfolios/${portfolioId}`;
   try {
     const fetchPortfolios = await makeCall('GET', url, path, '');
 
     const portFoliosList = await fetchPortfolios.json();
-    return portFoliosList;
+    return portFoliosList.portfolio;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const getAllPortfolios = async () => {
+  const { port, httpHost } = await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/portfolios`;
+
+  const path = `/v1/portfolios`;
+  try {
+    const fetchPortfolios = await makeCall('GET', url, path, '');
+
+    const portFoliosList = await fetchPortfolios.json();
+    return portFoliosList.portfolios;
   } catch (e) {
     return e;
   }

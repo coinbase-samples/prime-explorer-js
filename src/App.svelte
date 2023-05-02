@@ -22,7 +22,6 @@
   import Allocations from './routes/Orders/Allocations.svelte';
   import Nav from './Nav.svelte';
   import { Router, Route } from 'svelte-routing';
-  import AccountItem from './routes/AccountItem.svelte';
   import PlaceOrder from './routes/Orders/PlaceOrder.svelte';
   import CreateTransfer from './routes/Transactions/CreateTransfer.svelte';
   import CreateWithdrawal from './routes/Transactions/CreateWithdrawal.svelte';
@@ -35,6 +34,10 @@
   import Wallets from './routes/Wallets/Wallets.svelte';
   import WalletId from './routes/Wallets/WalletId.svelte';
   import Exchange from './routes/Exchange/Exchange.svelte';
+  import ExchangeFills from './routes/Exchange/Orders/ExchangeFills.svelte';
+  import ExchangeOpenOrders from './routes/Exchange/Orders/ExchangeOpenOrders.svelte';
+  import ExchangeOrderId from './routes/Exchange/Orders/ExchangeOrderId.svelte';
+  import PlaceExchangeOrder from './routes/Exchange/Orders/PlaceExchangeOrder.svelte';
   import Withdrawals from './routes/Exchange/Withdrawals.svelte';
   import WithdrawToPaymentMethod from './routes/Exchange/WithdrawToPaymentMethod.svelte';
   import DepositToPaymentMethod from './routes/Exchange/DepositToPaymentMethod.svelte';
@@ -48,7 +51,8 @@
   import CreateConversion from './routes/Transactions/CreateConversion.svelte';
   import Transfers from './routes/Exchange/Transfers.svelte';
   import PaymentMethods from './routes/Exchange/PaymentMethods.svelte';
-
+  import CreateAllocation from './routes/Orders/CreateAllocation.svelte';
+  import AllocationId from './routes/Orders/AllocationId.svelte';
 
   const url = '';
 </script>
@@ -61,7 +65,9 @@
   <Route path="/Orders/:orderId" component={OrderId} />
   <Route path="/Orders/Feed" component={OrderFeed} />
   <Route path="/Orders/Allocations" component={Allocations} />
+  <Route path="/Orders/Allocations/:allocationId" component={AllocationId} />
   <Route path="/Orders/Create" component={PlaceOrder} orderForm="true" />
+  <Route path="/Orders/Allocate" component={CreateAllocation} />
   <Route path="/Products" component={Products} />
   <Route path="/Users" component={Users} />
   <Route path="/Transactions" component={Transactions} />
@@ -70,7 +76,6 @@
   <Route path="/Transactions/withdrawals/create" component={CreateWithdrawal} />
   <Route path="/Transactions/conversions/create" component={CreateConversion} />
   <Route path="/Addresses" component={Addresses} />
-  <Route path="/Accounts/Item" component={AccountItem} />
   <Route path="/MarketData" component={MarketData} />
   <Route path="/Wallets" component={Wallets} />
   <Route path="/Wallets/:walletId" component={WalletId} />
@@ -78,6 +83,10 @@
   <Route path="/Activities" component={Activities} />
   <Route path="/Activities/:activityId" component={ActivityId} />
   <Route path="/Exchange" exact component={Exchange} />
+  <Route path="/Exchange/Orders/Fills" exact component={ExchangeFills} />
+  <Route path="/Exchange/Orders/Open" exact component={ExchangeOpenOrders} />
+  <Route path="/Exchange/Orders/:orderId" exact component={ExchangeOrderId} />
+  <Route path="/Exchange/Orders/Create" exact component={PlaceExchangeOrder} />
   <Route path="/Exchange/Withdrawals" exact component={Withdrawals} />
   <Route
     path="/Exchange/WithdrawToPaymentMethod"
@@ -91,7 +100,7 @@
   />
   <Route path="/Exchange/ConvertCurrency" exact component={ConvertCurrency} />
   <Route path="/Exchange/Currencies" exact component={Currencies} />
-    <Route path="/Exchange/Payments" exact component={PaymentMethods} />
+  <Route path="/Exchange/Payments" exact component={PaymentMethods} />
 
   <Route path="/Exchange/Transfers" exact component={Transfers} />
   <Route path="/Exchange/Currencies/:currencyId" component={CurrencyId} />

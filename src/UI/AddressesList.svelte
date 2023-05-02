@@ -17,12 +17,16 @@
 
   import { onMount } from 'svelte';
   import { createForm } from 'svelte-forms-lib';
-  import queryString from 'querystring';
   import { getAddressBook } from '../apis/AddressBook';
-  import { Content, Button, OutboundLink } from 'carbon-components-svelte';
-  import { DataTable, Link } from 'carbon-components-svelte';
-  import _ from 'lodash-es';
+  import {
+    Content,
+    Button,
+    OutboundLink,
+    DataTable,
+    Link,
+  } from 'carbon-components-svelte';
   import CreateAddressForm from './CreateAddressForm.svelte';
+  import { generateQueryparams } from '../utils/queryParams';
 
   let addresses;
   let addressesFilter;
@@ -53,12 +57,8 @@
       limit,
       sort_direction,
     };
-    const filteredQueryParams = _.omitBy(
-      queryParams,
-      (v) => _.isUndefined(v) || _.isNull(v) || v === ''
-    );
 
-    const stringifiedQueryParams = queryString.stringify(filteredQueryParams);
+    const stringifiedQueryParams = generateQueryparams(queryParams);
 
     addressesFilter = await getAddressBook(stringifiedQueryParams);
     addressesFilterView = true;
@@ -89,7 +89,7 @@
       <div class="mb-4">
         <form
           on:submit={handleSubmit}
-          class="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+          class="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
         >
           <label
             class="mb-2 block text-sm font-bold text-gray-700"
@@ -98,7 +98,7 @@
           <select
             id="sort_direction"
             name="sort_direction"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.sort_direction}
           >
@@ -114,7 +114,7 @@
           <input
             id="currency_symbol"
             name="currency_symbol"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.currency_symbol}
           />
@@ -127,7 +127,7 @@
             name="search"
             on:change={handleChange}
             bind:value={$form.search}
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           />
           <label class="mb-2 block text-sm font-bold text-gray-700" for="limit"
             >Limit:
@@ -139,7 +139,7 @@
           <input
             id="limit"
             name="limit"
-            class="focus:outline-none focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow"
+            class="focus:shadow-outline mb-3 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
             on:change={handleChange}
             bind:value={$form.limit}
           />
@@ -147,12 +147,12 @@
 
           <br /><br />
           <Button
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             type="submit">Submit</Button
           >
           <Button
             on:click={() => (addressesForm = false)}
-            class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+            class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             >Close</Button
           >
         </form>
@@ -161,12 +161,12 @@
     {:else}
       <Button
         on:click={() => (addressesForm = true)}
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Filter Addresses</Button
       >
       <Button
         on:click={() => (createAddressForm = true)}
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Create Addresses</Button
       >
     {/if}
@@ -176,7 +176,7 @@
         kind="danger"
         ls
         on:click={() => (createAddressForm = false)}
-        class="focus:outline-none focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        class="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
         >Close</Button
       >
     {/if}

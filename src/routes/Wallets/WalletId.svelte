@@ -16,13 +16,12 @@
    */
 
   import 'carbon-components-svelte/css/white.css';
-  import { CodeSnippet } from 'carbon-components-svelte';
+  import { CodeSnippet, Content, Button } from 'carbon-components-svelte';
   import Nav from '../../Nav.svelte';
   import WalletBalance from '../../UI/WalletBalance.svelte';
   import WalletDepositInstructionsForm from '../../UI/WalletDepositInstructionsForm.svelte';
   import { depositInstructions } from '../../stores/depositDetails-store';
 
-  import { Content, Button } from 'carbon-components-svelte';
   import { onMount } from 'svelte';
   import { getWalletId } from '../../apis/Wallets';
   import WalletIdTransactions from '../../UI/Transactions/WalletIdTransactions.svelte';
@@ -39,6 +38,7 @@
   onMount(async () => {
     walletIdDetails = await getWalletId(walletId);
     result = walletIdDetails;
+    name = walletIdDetails.name;
     details = false;
   });
 
@@ -73,7 +73,7 @@
               </div>
               <div class="mt-3 flex flex-row justify-between">
                 <div>
-                  <h4>Name: {name} :</h4>
+                  <h4>Name: {name}</h4>
                   <WalletBalance {walletId} />
 
                   <CodeSnippet
