@@ -33,6 +33,7 @@ export const getEndDate = (daysFwd) => {
 
 export const assetsMenuList = [
   'BTC-USD',
+  'BLUR-USD',
   'ETH-USD',
   'MATIC-USD',
   'DOGE-USD',

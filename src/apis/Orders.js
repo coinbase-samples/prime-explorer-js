@@ -145,6 +145,7 @@ export const getOrders = async (queryParams) => {
   try {
     const fetchOrders = await makeCall('GET', ordersUrl, path, '');
     const orderList = await fetchOrders.json();
+    console.log(orderList);
     return orderList;
   } catch (e) {
     return e;
