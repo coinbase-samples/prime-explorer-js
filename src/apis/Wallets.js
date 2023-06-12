@@ -47,11 +47,10 @@ export const getWalletId = async (walletId) => {
   try {
     const fetchWalletId = await makeCall('GET', url, path, '');
     const stakingCall = await makeCall('GET', stakignUrl, stakingPath, '');
-    console.log('this is the staking call, ', restake());
+    //console.log('this is the unstaking call, ', unstake());
     const stakingResponse = await stakingCall.json();
     console.log('this is the staking response, ', stakingResponse);
     const walletResponse = await fetchWalletId.json();
-
     return walletResponse.wallet;
   } catch (e) {
     return e;
@@ -132,12 +131,16 @@ export const getWalletTransactions = async (walletId, queryParams) => {
 export const initiateStake = async () => {
   const { port, portfolioId, httpHost } = await fetchStore();
 
-  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/9035fa46-13ab-4751-8680-df6fe624d0b4/staking/initiate`;
-  const path = `/v1/portfolios/${portfolioId}/wallets/9035fa46-13ab-4751-8680-df6fe624d0b4/staking/initiate`;
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/6b8140db-97cc-45d4-8d9f-40924dccc492/staking/initiate`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/6b8140db-97cc-45d4-8d9f-40924dccc492/staking/initiate`;
+  //cosmos validator address: cosmosvaloper1c4k24jzduc365kywrsvf5ujz4ya6mwympnc4en
+  //cosmos wallet id: 9035fa46-13ab-4751-8680-df6fe624d0b4
+  //matic wallet id: 6b8140db-97cc-45d4-8d9f-40924dccc492
+  //matic validator address: 0x857679d69fE50E7B722f94aCd2629d80C355163d
   const body = {
     idempotencyKey: uuidv4(),
     inputs: {
-      validator_address: 'beefKGBWeSpHzYBHZXwp5So7wdQGX6mu4ZHCsH3uTar',
+      validator_address: '0x857679d69fE50E7B722f94aCd2629d80C355163d',
     },
   };
   const payload = JSON.stringify(body);
@@ -152,10 +155,11 @@ export const initiateStake = async () => {
 };
 
 export const unstake = async () => {
+  //cosmos unstake address:  c84b655f-1ed2-44d5-b670-4a0939dcc4ab
   const { port, portfolioId, httpHost } = await fetchStore();
 
-  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/9035fa46-13ab-4751-8680-df6fe624d0b4/staking/unstake`;
-  const path = `/v1/portfolios/${portfolioId}/wallets/9035fa46-13ab-4751-8680-df6fe624d0b4/staking/unstake`;
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/c84b655f-1ed2-44d5-b670-4a0939dcc4ab/staking/unstake`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/c84b655f-1ed2-44d5-b670-4a0939dcc4ab/staking/unstake`;
   const body = {
     idempotencyKey: uuidv4(),
   };
@@ -173,8 +177,8 @@ export const unstake = async () => {
 export const restake = async () => {
   const { port, portfolioId, httpHost } = await fetchStore();
 
-  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/5aca7d45-03d5-4465-9917-e765d01e89cd/staking/restake`;
-  const path = `/v1/portfolios/${portfolioId}/wallets/5aca7d45-03d5-4465-9917-e765d01e89cd/staking/restake`;
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/cfde9bf4-1050-4b4f-b32d-31856472d7e0/staking/restake`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/cfde9bf4-1050-4b4f-b32d-31856472d7e0/staking/restake`;
   const body = {
     idempotencyKey: uuidv4(),
   };

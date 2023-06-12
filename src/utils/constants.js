@@ -21,7 +21,6 @@ export const getStartDate = (daysAgo) => {
 
   return startDate;
 };
-
 export const getEndDate = (daysFwd) => {
   const date = new Date();
   date.setDate(date.getDate() + daysFwd);
