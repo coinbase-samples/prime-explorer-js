@@ -1,13 +1,18 @@
 <script>
   import { getWalletBalance } from '../apis/Wallets';
   import { onMount } from 'svelte';
-  import { Button, Modal } from 'carbon-components-svelte';
+  import { Button, Modal, Loading } from 'carbon-components-svelte';
+  import { restake, initiateStake, unstake } from '../apis/Wallets';
 
   export let walletId;
   let walletBalanceDetails;
   let isModalOpen = false;
   let modalState = 'preview';
   let modalProps = {};
+  let stakingStatus = 'loading';
+  let loadingStakeResponse = false
+  let stakeResponse;
+
 
   onMount(async () => {
     walletBalanceDetails = await getWalletBalance(walletId);
@@ -15,6 +20,12 @@
 
   const stakeClicked = () => {
     console.log('Stake clicked');
+    isModalOpen = true;
+    modalProps = {
+      heading: 'Stake Your asset',
+      type: 'stake',
+      description: `Would you like to stake your ${walletBalanceDetails.balance.amount} amount?`,
+    };
   };
 
   const unstakeClicked = () => {
@@ -35,19 +46,41 @@
     };
   };
 
-  const executeRestake = () => {
-    console.log('Restake executed');
+  const executeStake = async (type) => {
+    console.log('executeStake', type);
+    loadingStakeResponse = true;
+    switch (type) {
+  case 'stake':
+    stakeResponse = await initiateStake(walletId, 'beefKGBWeSpHzYBHZXwp5So7wdQGX6mu4ZHCsH3uTar');
+    break;
+  case 'unstake':
+    stakeResponse = await unstake(walletId);
+    break;
+  case 'restake':
+    stakeResponse = await restake(walletId);
+    break;
+  default:
+    // Handle the default case here if needed
+    break;
+}
+    loadingStakeResponse = false;
+    if (stakeResponse.activity_id) {
+      stakingStatus = `Success. Your wallet has been ${type}d. Here is your activity id: ${stakeResponse.activity_id}`
+    } else {
+      stakingStatus = `Failed. Your rewards have not been restaked. Reason: ${stakeResponse.message}`;
+    }
     modalState = 'response';
     modalProps = {
-      heading: 'Restake Rewards Response',
-      type: 'restake',
-      description: 'Status: Success',
+      heading: `${type} Response`,
+      type: {type},
+      description: `Status: ${stakingStatus}`,
     };
-
   };
 
   const closeModal = () => {
     isModalOpen = false;
+     modalState = 'preview';
+
   };
 </script>
 
@@ -79,7 +112,7 @@
       on:click:button--secondary={() => (isModalOpen = false)}
       on:open
       on:close
-      on:submit={executeRestake}
+      on:submit={executeStake(modalProps.type)}
     >
       <p>{modalProps.description}</p>
     </Modal>
@@ -96,7 +129,11 @@
       on:submit={closeModal}
 
     >
+    {#if loadingStakeResponse}
+      <Loading />
+    {:else}
       <p>{modalProps.description}</p>
+    {/if}
     </Modal>
   {/if}
 
