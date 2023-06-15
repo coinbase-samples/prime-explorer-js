@@ -45,6 +45,7 @@ const formatBody = (
     body.expiry_time = expiry_time;
   }
   if (type === 'LIMIT') {
+    body.limit_price = limit_price;
     body.time_in_force = time_in_force_text;
     body.start_time = start_time;
     body.display_base_size = display_base_size;
