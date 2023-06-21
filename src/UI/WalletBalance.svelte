@@ -5,6 +5,7 @@
   import { restake, initiateStake, unstake } from '../apis/Wallets';
 
   export let walletId;
+  export let asset;
   let walletBalanceDetails;
   let isModalOpen = false;
   let modalState = 'preview';
@@ -19,7 +20,6 @@
   });
 
   const stakeClicked = () => {
-    console.log('Stake clicked');
     isModalOpen = true;
     modalProps = {
       heading: 'Stake Your asset',
@@ -47,7 +47,6 @@
   };
 
   const executeStake = async (type) => {
-    console.log('executeStake', type);
     loadingStakeResponse = true;
     switch (type) {
   case 'stake':
@@ -82,6 +81,7 @@
      modalState = 'preview';
 
   };
+
 </script>
 
 {#if walletBalanceDetails && walletBalanceDetails.balance}
@@ -92,13 +92,13 @@
   <h4>Unvested Amount: {walletBalanceDetails.balance.unvested_amount}</h4>
   <h4>Rewards Amount: {walletBalanceDetails.balance.pending_rewards_amount}</h4>
   <h4>Past Rewards Amount: {walletBalanceDetails.balance.past_rewards_amount}</h4>
-
-  {#if walletBalanceDetails.balance.bonded_amount > 0}
+  
+ {#if walletBalanceDetails.balance.bonded_amount > 0}
     <Button size="small" on:click={unstakeClicked}>Unstake</Button>
     {#if walletBalanceDetails.balance.pending_rewards_amount > 0}
       <Button size="small" on:click={restakeClicked}>Restake Rewards</Button>
     {/if}
-  {:else}
+  {:else if ['SOL', 'ATOM', 'NEAR', 'XTZ'].includes(asset)}
     <Button size="small" on:click={stakeClicked}>Stake</Button>
   {/if}
 

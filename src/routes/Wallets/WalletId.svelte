@@ -34,9 +34,11 @@
   let form = false;
   let depositDetails;
   let WalletTransactionsComponent = false;
+  let asset;
 
   onMount(async () => {
     walletIdDetails = await getWalletId(walletId);
+    asset = walletIdDetails.symbol;
     result = walletIdDetails;
     name = walletIdDetails.name;
     details = false;
@@ -74,7 +76,7 @@
               <div class="mt-3 flex flex-row justify-between">
                 <div>
                   <h4>Name: {name}</h4>
-                  <WalletBalance {walletId} />
+                  <WalletBalance {walletId} {asset}/>
 
                   <CodeSnippet
                     type="multi"
