@@ -122,6 +122,24 @@ export const getWalletTransactions = async (walletId, queryParams) => {
   }
 };
 
+export const getWalletValidators = async (asset) => {
+  const lowerCaseAsset = asset.toLowerCase();
+  const { port, portfolioId, httpHost } = await fetchStore();
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/staking/validators/${lowerCaseAsset}`;
+  const path = `/v1/portfolios/${portfolioId}/staking/validators/${lowerCaseAsset}`;
+
+  try {
+    const fetchWalletValidators = await makeCall('GET', url, path, '');
+
+    const walletValidatorResponse = await fetchWalletValidators.json();
+
+    return walletValidatorResponse.validators[0];
+  } catch (e) {
+    return e;
+  }
+};
+
+
 export const initiateStake = async (walletId, validator_address) => {
   const { port, portfolioId, httpHost } = await fetchStore();
 

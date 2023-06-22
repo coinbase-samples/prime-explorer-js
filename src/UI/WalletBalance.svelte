@@ -1,5 +1,5 @@
 <script>
-  import { getWalletBalance } from '../apis/Wallets';
+  import { getWalletBalance, getWalletValidators } from '../apis/Wallets';
   import { onMount } from 'svelte';
   import { Button, Modal, Loading } from 'carbon-components-svelte';
   import { restake, initiateStake, unstake } from '../apis/Wallets';
@@ -13,20 +13,23 @@
   let stakingStatus = 'loading';
   let loadingStakeResponse = false
   let stakeResponse;
+  let validators;
 
 
   onMount(async () => {
     walletBalanceDetails = await getWalletBalance(walletId);
+    validators = await getWalletValidators(asset);
   });
 
-  const stakeClicked = () => {
-    isModalOpen = true;
-    modalProps = {
-      heading: 'Stake Your asset',
-      type: 'stake',
-      description: `Would you like to stake your ${walletBalanceDetails.balance.amount} amount?`,
-    };
+ const stakeClicked = () => {
+  isModalOpen = true;
+  modalProps = {
+    heading: 'Stake Your asset',
+    type: 'stake',
+    description: `Would you like to stake your <strong>${walletBalanceDetails.balance.amount}</strong> amount to this validator <strong>${validators.name}</strong> with this address: <strong>${validators.address}</strong>?`,
   };
+};
+
 
   const unstakeClicked = () => {
     isModalOpen = true;
@@ -114,7 +117,7 @@
       on:close
       on:submit={executeStake(modalProps.type)}
     >
-      <p>{modalProps.description}</p>
+    <p>{@html modalProps.description}</p>
     </Modal>
   {/if}
 
