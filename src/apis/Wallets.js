@@ -123,10 +123,9 @@ export const getWalletTransactions = async (walletId, queryParams) => {
 };
 
 export const getWalletValidators = async (asset) => {
-  const lowerCaseAsset = asset.toLowerCase();
   const { port, portfolioId, httpHost } = await fetchStore();
-  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/staking/validators/${lowerCaseAsset}`;
-  const path = `/v1/portfolios/${portfolioId}/staking/validators/${lowerCaseAsset}`;
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/staking/validators/${asset}-USD`;
+  const path = `/v1/portfolios/${portfolioId}/staking/validators/${asset}-USD`;
 
   try {
     const fetchWalletValidators = await makeCall('GET', url, path, '');
