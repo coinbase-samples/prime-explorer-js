@@ -18,8 +18,7 @@
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "^3.0.0",
     "autoprefixer": "10.4.7",
-    "eslint": "^8.19.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint": "^8.46.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "postcss": "^8.3.7",
     "postcss-cli": "^10.0.0",
@@ -53,10 +52,8 @@
     "http-cache-semantics": "^4.1.1",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
-    "npm": "^8.14.0",
     "path": "^0.12.7",
     "rollup-plugin-npm": "^2.0.0",
-    "semver": "^7.5.4",
     "uuid": "^8.3.2",
     "yaml": "^2.2.2"
   }
