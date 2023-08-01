@@ -45,6 +45,7 @@ const formatBody = (
     body.expiry_time = expiry_time;
   }
   if (type === 'LIMIT') {
+    body.limit_price = limit_price;
     body.time_in_force = time_in_force_text;
     body.start_time = start_time;
     body.display_base_size = display_base_size;
@@ -136,7 +137,7 @@ export const createOrder = async (
 
 export const getOrders = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
-  const startDate = getStartDate(30);
+  const startDate = getStartDate(3);
   const path = `/v1/portfolios/${portfolioId}/orders`;
   const ordersUrl = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/orders?${
     queryParams ? queryParams : `start_date=${startDate}`
@@ -145,6 +146,7 @@ export const getOrders = async (queryParams) => {
   try {
     const fetchOrders = await makeCall('GET', ordersUrl, path, '');
     const orderList = await fetchOrders.json();
+    console.log(orderList);
     return orderList;
   } catch (e) {
     return e;

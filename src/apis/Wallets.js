@@ -15,6 +15,7 @@
  */
 import { fetchStore } from '../stores/userSession-store';
 import { makeCall } from './PrimeClient';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getPortfolioWallets = async (queryParams) => {
   const { port, portfolioId, httpHost } = await fetchStore();
@@ -39,11 +40,11 @@ export const getWalletId = async (walletId) => {
 
   const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/${walletId}`;
   const path = `/v1/portfolios/${portfolioId}/wallets/${walletId}`;
+
   try {
     const fetchWalletId = await makeCall('GET', url, path, '');
 
     const walletResponse = await fetchWalletId.json();
-
     return walletResponse.wallet;
   } catch (e) {
     return e;
@@ -116,6 +117,84 @@ export const getWalletTransactions = async (walletId, queryParams) => {
     const walletTransactionsResponse = await fetchWalletTransactions.json();
 
     return walletTransactionsResponse.transactions;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const getWalletValidators = async (asset) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/staking/validators/${asset}-USD`;
+  const path = `/v1/portfolios/${portfolioId}/staking/validators/${asset}-USD`;
+
+  try {
+    const fetchWalletValidators = await makeCall('GET', url, path, '');
+
+    const walletValidatorResponse = await fetchWalletValidators.json();
+
+    return walletValidatorResponse.validators[0];
+  } catch (e) {
+    return e;
+  }
+};
+
+
+export const initiateStake = async (walletId, validator_address) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/initiate`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/initiate`;
+
+  const body = {
+    idempotencyKey: uuidv4(),
+    inputs: {
+      validator_address,
+    },
+  };
+  const payload = JSON.stringify(body);
+  try {
+    const executeInitiateStake = await makeCall('POST', url, path, payload);
+
+    const executeInitiateStakeResponse = await executeInitiateStake.json();
+    return executeInitiateStakeResponse;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const unstake = async (walletId) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/unstake`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/unstake`;
+  const body = {
+    idempotencyKey: uuidv4(),
+  };
+  const payload = JSON.stringify(body);
+  try {
+    const executeUnstake = await makeCall('POST', url, path, payload);
+
+    const unstakeResponse = await executeUnstake.json();
+    return unstakeResponse;
+  } catch (e) {
+    return e;
+  }
+};
+
+export const restake = async (walletId) => {
+  const { port, portfolioId, httpHost } = await fetchStore();
+
+  const url = `${httpHost}:${port}/api/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/restake`;
+  const path = `/v1/portfolios/${portfolioId}/wallets/${walletId}/staking/restake`;
+  const body = {
+    idempotencyKey: uuidv4(),
+  };
+  const payload = JSON.stringify(body);
+  try {
+    const executeRestake = await makeCall('POST', url, path, payload);
+
+    const restakeResponse = await executeRestake.json();
+    return restakeResponse;
   } catch (e) {
     return e;
   }

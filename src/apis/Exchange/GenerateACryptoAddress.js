@@ -2,12 +2,13 @@ import { fetchStore } from '../../stores/userSession-store';
 import { makeCall } from './ExchangeClient';
 
 export const CreateCryptoAddress = async (account_id) => {
+  const accountId = account_id.replace(/-USD/g, '');
   const { port, httpHost } = await fetchStore();
-  const url = `${httpHost}:${port}/api/exchange/coinbase-accounts/${account_id}/addresses`;
-  const path = `/coinbase-accounts/${account_id}/addresses`;
+  const url = `${httpHost}:${port}/api/exchange/coinbase-accounts/${accountId}/addresses`;
+  const path = `/coinbase-accounts/${accountId}/addresses`;
 
   const body = {
-    account_id,
+    accountId,
   };
   const payload = JSON.stringify(body);
 

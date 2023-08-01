@@ -21,7 +21,6 @@ export const getStartDate = (daysAgo) => {
 
   return startDate;
 };
-
 export const getEndDate = (daysFwd) => {
   const date = new Date();
   date.setDate(date.getDate() + daysFwd);
@@ -33,6 +32,7 @@ export const getEndDate = (daysFwd) => {
 
 export const assetsMenuList = [
   'BTC-USD',
+  'BLUR-USD',
   'ETH-USD',
   'MATIC-USD',
   'DOGE-USD',
