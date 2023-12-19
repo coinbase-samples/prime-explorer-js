@@ -42,7 +42,7 @@
   "dependencies": {
     "carbon-components-svelte": "^0.41.0",
     "carbon-preprocess-svelte": "^0.6.0",
-    "coinbase-pro-node": "^3.0.8",
+    "coinbase-pro-node": "^9.0.0",
     "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
